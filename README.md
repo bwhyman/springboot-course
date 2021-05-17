@@ -1,4 +1,6 @@
-# Frameworks for Web Application - Springboot Course
+# Frameworks for Web Application - Springboot Course - Deprecated
+停止维护，请参阅整合mybatis-plus/spring-cache/redis/spring-cloud-gateway等框架的课程示例代码  
+https://github.com/bwhyman/springboot-course-2021
 #### Overview
 China, Northeast Forestry University, Software Engineering, Frameworks for Web Application, 2020
 
