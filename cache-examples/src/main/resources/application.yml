@@ -1,0 +1,12 @@
+spring:
+  cache:
+    caffeine: # 如果在代码声明配置并注入缓存管理器，此处配置无效
+      spec: expireAfterWrite=240s, maximumSize=200
+
+logging:
+  level:
+    root: warn
+    com:
+      example: debug
+  pattern:
+    console: '%-5level %C.%M[%line] - %msg%n'

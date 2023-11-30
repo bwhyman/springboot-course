@@ -1,0 +1,33 @@
+###
+GET http://localhost:8080/api/example01/index
+
+###
+GET http://localhost:8080/api/example01/addresses
+
+###
+POST http://localhost:8080/api/example01/addresses
+Content-Type: application/json
+
+{
+  "detail": "956",
+  "comment": "测试"
+}
+
+###
+GET http://localhost:8080/api/example01/addresses/3
+
+###
+POST http://localhost:8080/api/example01/addresses02
+Content-Type: application/json
+
+{
+  "detail": "956",
+  "comment": "测试",
+  "user": {
+    "id": 10
+  }
+}
+###
+GET http://localhost:8080/api/example01/inject
+
+

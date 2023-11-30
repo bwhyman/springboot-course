@@ -1,0 +1,19 @@
+POST http://localhost:8080/api/example06/login
+Content-Type: application/json
+
+{
+  "userName": "BO",
+  "password": "123456"
+}
+
+> {% client.global.set("token", response.headers.valueOf("token")); %}
+###
+GET  http://localhost:8080/api/example06/admin/welcome
+
+###
+GET  http://localhost:8080/api/example06/admin/welcome
+token: 0d3924b168a69a07a3c3172a0f9aa115dfbce48719d7ba1626be7e96dfec63e0813ea6da0a5aae8c021c876be580750f
+
+### 基于脚本自动获取token数据。便于测试
+GET  http://localhost:8080/api/example06/admin/welcome
+token: {{token}}
