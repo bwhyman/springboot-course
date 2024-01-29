@@ -1,0 +1,13 @@
+spring:
+  # 不能与spring混合配置。使用独立配置时，不在data路径下
+  redis:
+    redisson:
+      file: classpath:redisson.yml
+
+logging:
+  level:
+    root: warn
+    com:
+      example: debug
+  pattern:
+    console: '%-5level %C.%M[%line] - %msg%n'

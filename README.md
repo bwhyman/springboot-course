@@ -38,6 +38,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - /spring-examples
 - /springmvc-examples
 - /cache-examples
+- /redis-examples
 - /backend-jdbc-examples，为前端项目提供模拟数据互交
 
 ### Online Tutorials
