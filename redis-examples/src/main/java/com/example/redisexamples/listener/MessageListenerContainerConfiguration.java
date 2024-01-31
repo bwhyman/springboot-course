@@ -16,6 +16,7 @@ import org.springframework.data.redis.connection.stream.StreamOffset;
 import org.springframework.data.redis.stream.StreamMessageListenerContainer;
 
 import java.time.Duration;
+import java.util.concurrent.Executors;
 
 @Configuration
 @RequiredArgsConstructor
@@ -38,9 +39,11 @@ public class MessageListenerContainerConfiguration {
         StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ObjectRecord<String, String>> options =
                 StreamMessageListenerContainer.StreamMessageListenerContainerOptions
                         .builder()
+                        // 默认使用执行短操作，反复创建销毁的伪线程池
+                        .executor(Executors.newSingleThreadExecutor())
                         // Stream 中没有消息时阻塞多长时间。需要比 `spring.redis.timeout` 的时间小
                         .pollTimeout(Duration.ofMillis(100))
-                        // 转换成消息体为具体类型
+                        // 转换消息体为具体类型
                         .targetType(String.class).build();
         StreamMessageListenerContainer<String, ObjectRecord<String, String>> container = StreamMessageListenerContainer.create(redisConnectionFactory, options);
 

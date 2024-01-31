@@ -26,7 +26,10 @@ class OrderServiceTest {
 
     @Test
     void rushBuyTest() {
-        long quantity = orderService.rushBuy(Item.builder().id("01HN7JNHG93N3RSPF60MEG4WE2").build(), "152");
+        // 模拟抢购的商品，抢购用户
+        Item item = Item.builder().id("01HN7JNHG93N3RSPF60MEG4WE2").build();
+        var userId = "152";
+        long quantity = orderService.rushBuy(item, userId);
         log.debug("剩余数量：{}", quantity);
     }
 }

@@ -11,9 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class UILDTest {
     @Autowired
     private ULID ulid;
-
     @Test
     void nextTest() {
+        log.debug(ulid.nextULID());
+        log.debug(ulid.nextULID());
         log.debug(ulid.nextULID());
     }
 }

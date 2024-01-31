@@ -3,5 +3,6 @@ singleServerConfig:
   username: default
   password: 1213
   database: 0
+threads: 8
 #  改为默认按字符串序列化
 # codec: !<org.redisson.client.codec.StringCodec> {}

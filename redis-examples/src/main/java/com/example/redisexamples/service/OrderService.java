@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
 import org.redisson.api.stream.StreamAddArgs;
+import org.redisson.client.codec.IntegerCodec;
 import org.redisson.client.codec.StringCodec;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +24,14 @@ public class OrderService {
     // 将指定商品批量加入redis抢购数据库
     @Transactional
     public void addItems(List<Item> items) {
+        // 获取批处理操作对象
         RBatch batch = redissonClient.createBatch();
         for (Item item : items) {
-            batch.getMap(Item.PRE_KEY + item.getId(), StringCodec.INSTANCE)
-                    .putIfAbsentAsync("total", item.getTotal());
+            // 获取操作redis hash对象
+            // 字段值需要计算，以整数存储
+            RMapAsync<String, Integer> map =
+                    batch.getMap(Item.PRE_KEY + item.getId(), IntegerCodec.INSTANCE);
+            map.putIfAbsentAsync("total", item.getTotal());
         }
         batch.execute();
     }
@@ -35,17 +40,22 @@ public class OrderService {
     @Transactional
     public long rushBuy(Item item, String userId) {
         var key = Item.PRE_KEY + item.getId();
+        // 调用redis抢购函数
         long quantity = redissonClient
                 .getFunction()
                 .call(FunctionMode.WRITE, "rushBuy", FunctionResult.LONG, List.of(key));
         if (quantity == -1) {
             log.debug("抢光啦");
-            return 0;
+            return quantity;
         }
         // 抢购成功，则基于用户ID执行扣款等操作
         log.debug("{}，抢购成功", userId);
         // 创建订单
-        Order order = Order.builder().id(ulid.nextULID()).itemId(item.getId()).userId(userId).build();
+        Order order = Order.builder()
+                .id(ulid.nextULID())
+                .itemId(item.getId())
+                .userId(userId)
+                .build();
         // 默认基于Kryo5Codec序列化对象，非json可读。
         RBucket<Order> bucket = redissonClient.getBucket(Order.PRE_KEY + order.getId());
         // 持久化订单
@@ -56,8 +66,10 @@ public class OrderService {
     }
 
     private void pushOrderQueue(Order order) {
+        // 消息ID类型；消息体类型
         RStream<String, String> stream = redissonClient.getStream(Order.STREAM_KEY, StringCodec.INSTANCE);
         // 仅需在消息体添加订单ID
         stream.add(StreamAddArgs.entry("orderid", order.getId()));
+
     }
 }
