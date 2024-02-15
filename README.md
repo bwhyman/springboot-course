@@ -7,7 +7,7 @@ China, Northeast Forestry University, Software Engineering, Frameworks for Web A
 Web系统框架，是东北林业大学软件工程专业第6学期的一门专业选修课。课程包含32+16学时。  
 主讲教师：王波老师。  
 部分技术基础框架版本已经过时，同时为适应纯后端框架技术课程需要，移除课程不再讲解的技术知识。  
-`jpa/mybatis/mongodb/redis/reactive-redis/rocketmq/gateway/nacos`等。
+`jpa/mybatis/mongodb/reactive-redis/rocketmq/gateway/nacos`等。
 
 课程基于Springboot/spring Cloud框架的后端微服务架构、设计思想与实现技术。  
 课程的具体技术内容包括：
@@ -23,6 +23,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - 基于自定义异常的全局异常处理
 - 基于Junit5/Spring-Testing框架的单元测试与整合测试
 - 基于spring-cache的缓存技术
+- 基于Redis的缓存/限流/消息队列等技术
 - 基于webflux/r2dbc的异步非阻塞持久化技术
 
 ### Development Environments

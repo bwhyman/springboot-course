@@ -15,7 +15,7 @@ redis.register_function('rushBuy', rushBuy)
 -- 判断expireSec秒内，执行超过count次返回flase
 local function expireAPICount(keys, args)
     local hkey = keys[1]
-    -- lua函数参数仅支持传入java string/int类型；且int必须强制转换
+    -- lua函数参数仅支持传入java string/int类型。字符串可通过tonumber()函数转换
     local expireSec = args[1]
     local count = args[2]
     -- 键不存在，则为时效内的第一次

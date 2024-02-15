@@ -46,18 +46,18 @@ public class RedisTest {
     void setOrderTest() {
         RMap<String, Object> map = redissonClient.getMap("bike:2", StringCodec.INSTANCE);
         if (map.isExists()) {
-            map.forEach((k,v) -> {
-                log.debug("{} / {}", k, v);
-            });
+            map.forEach((k,v) -> log.debug("{} / {}", k, v));
         }
     }
     @Test
     void getOrderTest() {
+        // 模拟order ID
+        var orderId = ulid.nextULID();
         // 创建Order类型+ID的redis键
-        var key = Order.PRE_KEY + ulid.nextULID();
-        // Kryo5Codec序列化
+        var key = Order.PRE_KEY + orderId;
+        // Kryo5序列化
         RBucket<Order> bucket = redissonClient.getBucket(key);
-        bucket.set(Order.builder().id(key).userId("1").itemId("1").build());
+        bucket.set(Order.builder().id(orderId).userId("1").itemId("1").build());
         // 映射的新对象
         RBucket<Order> bucketN = redissonClient.getBucket(key);
         // 反序列化为Java对象。因具体化了泛型类型，支持类型检测

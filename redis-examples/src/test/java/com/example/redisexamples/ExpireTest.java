@@ -24,10 +24,10 @@ public class ExpireTest {
         // 模拟API请求限流。
         var key = "expires:agentids:6561";
         // expireSec秒内，执行超过count次返回flase
-        // lua函数参数仅支持传入java string/int类型
-        var count = 3;
-        var expireSec = 30;
-        for (int i = 0; i < count + 2; i++) {
+        // lua函数参数仅支持传入java string/number类型
+        var count = 2;
+        var expireSec = 5;
+        for (int i = 0; i < expireSec * 2 + 1; i++) {
             // 获取redis 函数操作对象
             // 传入的参数会按默认codec序列化
             // 但此处参数需要运算而非存储，因此显式声明按int传入
