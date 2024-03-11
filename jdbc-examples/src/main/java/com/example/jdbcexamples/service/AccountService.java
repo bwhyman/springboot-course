@@ -13,7 +13,8 @@ public class AccountService {
 
     @Transactional
     public Account update(String uid, float expire) {
-        Account account = accountRepository.findById(uid).orElseThrow(() -> new RuntimeException("账户不存在"));
+        Account account = accountRepository.findById(uid)
+                .orElseThrow(() -> new RuntimeException("账户不存在"));
         float balance = account.getBalance() - expire;
         if (balance < 0) {
             throw new RuntimeException("账户余额不足");

@@ -12,6 +12,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 课程基于Springboot/spring Cloud框架的后端微服务架构、设计思想与实现技术。  
 课程的具体技术内容包括：
 - 基于spring-data-jdbc的半自动面向对象持久化技术
+- 基于MySQL的关系型/非关系型混合开发技术
 - 基于SpringMVC框架的控制层技术
 - 基于Spring框架的业务逻辑层技术
 - 基于spring-security框架的安全服务技术
@@ -25,6 +26,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - 基于spring-cache的缓存技术
 - 基于Redis的缓存/限流/消息队列等技术
 - 基于webflux/r2dbc的异步非阻塞持久化技术
+- [基于spring-cloud的微服务网关/服务注册发现技术](https://github.com/bwhyman/uber-project-examples)
 
 ### Development Environments
 开发环境/框架及版本：
@@ -67,4 +69,3 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - https://github.com/bwhyman/springboot-course
 - https://github.com/bwhyman/vite-vue3-examples
 - https://github.com/bwhyman/flutter_examples
-
