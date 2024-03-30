@@ -25,8 +25,8 @@ public class AddressUser2RowMapper implements RowMapper<AddressUser2> {
                 .id(rs.getString("a.id"))
                 .detail(rs.getString("detail"))
                 .userId(rs.getString("user_id"))
-                .createTime(rs.getObject("u.create_time", LocalDateTime.class))
-                .updateTime(rs.getObject("u.update_time", LocalDateTime.class))
+                .createTime(rs.getObject("a.create_time", LocalDateTime.class))
+                .updateTime(rs.getObject("a.update_time", LocalDateTime.class))
                 .build();
         return AddressUser2.builder()
                 .user(user)

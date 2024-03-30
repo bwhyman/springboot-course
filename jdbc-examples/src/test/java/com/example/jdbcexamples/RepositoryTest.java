@@ -36,7 +36,8 @@ public class RepositoryTest {
     }
     @Test
     public void findByIdTest() {
-        userRepository.findById("1530375756270878723").ifPresent(user -> log.debug("{}", user));
+        userRepository.findById("1530375756270878723")
+                .ifPresent(user -> log.debug("{}", user));
     }
     @Test
     public void updateUserTest() {
