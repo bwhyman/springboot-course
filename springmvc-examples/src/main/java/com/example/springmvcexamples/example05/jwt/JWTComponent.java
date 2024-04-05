@@ -5,7 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.springmvcexamples.example02.handlingexception.exception.XException;
+import com.example.springmvcexamples.exception.Code;
+import com.example.springmvcexamples.exception.XException;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,23 +21,30 @@ public class JWTComponent {
     // 10s过期
     private final LocalDateTime time = LocalDateTime.now().plusSeconds(10);
     // 私钥
-    @Value("${my.salt}")
+    @Value("${my.secretkey}")
     private String secretkey;
+    private Algorithm algorithm;
+    // 组件初始化后，初始化加密算法对象。无需反复创建
+    @PostConstruct
+    private void init() {
+        algorithm = Algorithm.HMAC256(secretkey);
+    }
     public String encode(Map<String, Object> map) {
         return JWT.create()
                 .withPayload(map)
                 .withIssuedAt(new Date())
                 .withExpiresAt(Date.from(time.atZone(ZoneId.systemDefault()).toInstant()))
-                .sign(Algorithm.HMAC256(secretkey));
+                .sign(algorithm);
     }
 
     public DecodedJWT decode(String token) {
         try {
-            return JWT.require(Algorithm.HMAC256(secretkey)).build().verify(token);
+            return JWT.require(algorithm).build().verify(token);
         } catch (TokenExpiredException | SignatureVerificationException e) {
-            String msg = e instanceof TokenExpiredException
-            ? "过期请重新登录" : "无权限";
-            throw XException.builder().code(403).message(msg).build();
+            if (e instanceof SignatureVerificationException) {
+                throw XException.builder().code(Code.FORBIDDEN).build();
+            }
+            throw XException.builder().code(Code.TOKEN_EXPIRED).build();
         }
     }
 }

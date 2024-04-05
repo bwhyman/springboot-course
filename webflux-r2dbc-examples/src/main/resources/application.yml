@@ -1,0 +1,26 @@
+spring:
+  r2dbc:
+    url: r2dbcs:mysql://116.63.13.220:3306/2046204601
+    username: 2046204601
+    password: 2046204601
+    pool:
+      enabled: true
+      initial-size: 1
+      validation-query: select 1
+  sql:
+    init:
+      mode: always
+  jackson:
+    default-property-inclusion: non_null # 序列化时忽略空属性值
+
+logging:
+  level:
+    sql: debug
+    web: debug
+    com:
+      example: debug
+  pattern:
+    console: '%-5level %C.%M[%line] - %msg%n'
+
+my:
+  secretkey: '636eac2534bcfcc0'

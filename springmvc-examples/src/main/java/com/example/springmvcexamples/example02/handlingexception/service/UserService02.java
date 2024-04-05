@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example02.handlingexception.service;
 
-import com.example.springmvcexamples.example02.handlingexception.exception.XException;
+import com.example.springmvcexamples.exception.XException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,8 @@ public class UserService02 {
             Files.readString(Path.of("A:/aa.aa"));
         } catch (IOException e) {
             throw XException.builder()
-                    .code(500).message("读取文件错误！" + e.getMessage())
+                    .codeN(500)
+                    .message("读取文件错误！" + e.getMessage())
                     .build();
         }
     }

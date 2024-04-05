@@ -1,6 +1,6 @@
-package com.example.springmvcexamples.vo;
+package com.example.webfluxr2dbcexamples.vo;
 
-import com.example.springmvcexamples.exception.Code;
+import com.example.webfluxr2dbcexamples.exception.Code;
 import lombok.Builder;
 import lombok.Data;
 

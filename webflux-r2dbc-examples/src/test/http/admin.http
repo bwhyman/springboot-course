@@ -1,0 +1,21 @@
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "account": "admin",
+  "password": "admin"
+}
+> {% client.global.set("token", response.headers.valueOf("token")); %}
+###
+GET http://localhost:8080/api/admin/info
+token: {{token}}
+
+### 已存在异常
+POST http://localhost:8080/api/admin/users
+token: {{token}}
+Content-Type: application/json
+
+{
+  "account": "admin"
+}
+###

@@ -1,7 +1,8 @@
 package com.example.springmvcexamples.example06.interceptor.interceptor;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.springmvcexamples.example02.handlingexception.exception.XException;
+import com.example.springmvcexamples.exception.Code;
+import com.example.springmvcexamples.exception.XException;
 import com.example.springmvcexamples.example05.jwt.JWTComponent;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ public class LoginInterceptor06 implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
         if (token == null) {
-            throw XException.builder().code(401).message("未登录").build();
+            throw XException.builder().code(Code.UNAUTHORIZED).build();
         }
         DecodedJWT decodedJWT = jwtComponent.decode(token);
         String uid = decodedJWT.getClaim("uid").asString();
