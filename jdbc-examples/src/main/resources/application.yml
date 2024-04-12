@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: 'jdbc:mysql://116.63.13.220/2046204601?createDatabaseIfNotExist=true'
+    url: 'jdbc:mysql://116.63.13.220:3306/2046204601?createDatabaseIfNotExist=true'
     username: 2046204601
     password: 2046204601
   sql:
