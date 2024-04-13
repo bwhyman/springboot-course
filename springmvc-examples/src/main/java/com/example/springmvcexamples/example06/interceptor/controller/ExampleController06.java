@@ -3,6 +3,7 @@ package com.example.springmvcexamples.example06.interceptor.controller;
 import com.example.springmvcexamples.example05.jwt.JWTComponent;
 import com.example.springmvcexamples.example06.interceptor.entity.User06;
 import com.example.springmvcexamples.example06.interceptor.service.UserService06;
+import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.vo.ResultVO;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +23,10 @@ public class ExampleController06 {
     private final JWTComponent jwtComponent;
 
     @PostMapping("login")
-    public ResultVO login(@RequestBody User06 user, HttpServletResponse response) {
+    public ResultVO postLogin(@RequestBody User06 user, HttpServletResponse response) {
         User06 u = userService.getUser(user.getUserName());
         if (u == null || !encoder.matches(user.getPassword(), u.getPassword())) {
-            return ResultVO.error(401, "用户名密码错误");
+            return ResultVO.error(Code.LOGIN_ERROR);
         }
         // 登录成功，模拟获取用户id角色等信息，加密
         String result = jwtComponent.encode(Map.of("uid", u.getId(), "role", u.getRole()));

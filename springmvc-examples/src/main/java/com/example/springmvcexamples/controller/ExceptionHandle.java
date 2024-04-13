@@ -1,11 +1,14 @@
-package com.example.springmvcexamples.example03.beanvalidation.controller;
+package com.example.springmvcexamples.controller;
 
+import com.example.springmvcexamples.exception.Code;
+import com.example.springmvcexamples.exception.XException;
 import com.example.springmvcexamples.vo.ResultVO;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -13,9 +16,19 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.Set;
 
+@Order(2)
 @Slf4j
 @RestControllerAdvice
-public class ExceptionController03 {
+public class ExceptionHandle {
+    @ExceptionHandler(XException.class)
+    public ResultVO handleValidException(XException exception) {
+        // 如果直接封装了通用错误信息
+        if (exception.getCode() != null) {
+            return ResultVO.error(exception.getCode());
+        }
+        return ResultVO.error(exception.getCodeN(), exception.getMessage());
+    }
+
     /**
      * 属性校验失败异常
      *
@@ -33,7 +46,7 @@ public class ExceptionController03 {
                     strBuilder.append(e.getDefaultMessage());
                     strBuilder.append("; ");
                 });
-        return ResultVO.error(400, strBuilder.toString());
+        return ResultVO.error(Code.ERROR, strBuilder.toString());
     }
 
 
@@ -48,8 +61,8 @@ public class ExceptionController03 {
             MethodArgumentTypeMismatchException exception,
             HttpServletRequest request) {
         String msg = request.getRequestURI() +
-                ": " + "请求地址参数" + exception.getValue() + "错误";
-        return ResultVO.error(400, msg);
+                     ": " + "请求地址参数" + exception.getValue() + "错误";
+        return ResultVO.error(Code.ERROR, msg);
     }
 
     /**
@@ -68,7 +81,7 @@ public class ExceptionController03 {
                     strBuilder.append("，您输入的值：").append(exception.getValue());
                     strBuilder.append(", 类型错误！");
                 });
-        return ResultVO.error(400, strBuilder.toString());
+        return ResultVO.error(Code.ERROR, strBuilder.toString());
     }
 
 
@@ -85,6 +98,12 @@ public class ExceptionController03 {
         violations.forEach(v -> {
             strBuilder.append(v.getMessage()).append("; ");
         });
-        return ResultVO.error(400, strBuilder.toString());
+        return ResultVO.error(Code.ERROR, strBuilder.toString());
+    }
+
+    // 兜底异常处理
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    public ResultVO handleException(Exception exception) {
+        return ResultVO.error(Code.ERROR, exception.getMessage());
     }
 }

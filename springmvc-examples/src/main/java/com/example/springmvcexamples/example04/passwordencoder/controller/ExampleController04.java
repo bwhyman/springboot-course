@@ -3,6 +3,7 @@ package com.example.springmvcexamples.example04.passwordencoder.controller;
 
 import com.example.springmvcexamples.example04.passwordencoder.entity.User04;
 import com.example.springmvcexamples.example04.passwordencoder.service.UserService04;
+import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class ExampleController04 {
         User04 u = userService.getUser(user.getUserName());
         if (u == null || !passwordEncoder.matches(user.getPassword(), u.getPassword())) {
             log.debug("登录失败");
-            return ResultVO.error(401, "用户名密码错误");
+            return ResultVO.error(Code.LOGIN_ERROR);
         }
         // 登录成功，添加token等操作
         log.debug("登录成功");
