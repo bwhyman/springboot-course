@@ -22,7 +22,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - 基于AOP的切面技术
 - 基于自定义注解/反射/拦截器/AOP的细粒度权限控制与业务逻辑功能扩展
 - 基于自定义异常的全局异常处理
-- 基于Junit5/Spring-Testing框架的单元测试与整合测试
+- 基于Junit5/Spring-Testing/Mock框架的测试技术
 - 基于spring-cache的缓存技术
 - 基于Redis的缓存/限流/消息队列等技术
 - 基于webflux/r2dbc的异步非阻塞持久化技术
@@ -35,6 +35,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - Springboot ^3.2
 - Git ^2.4
 - MySQL ^8.0
+- Redis Stack ^7
 
 ### Examples
 课程代码由单工程多模块组成：
