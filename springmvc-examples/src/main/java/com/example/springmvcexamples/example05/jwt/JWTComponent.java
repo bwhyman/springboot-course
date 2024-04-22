@@ -18,8 +18,8 @@ import java.util.Map;
 
 @Component
 public class JWTComponent {
-    // 10s过期
-    private final LocalDateTime time = LocalDateTime.now().plusSeconds(10);
+    // 1ds过期
+    private final LocalDateTime time = LocalDateTime.now().plusDays(1);
     // 私钥
     @Value("${my.secretkey}")
     private String secretkey;

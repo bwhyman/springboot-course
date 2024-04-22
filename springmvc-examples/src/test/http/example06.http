@@ -7,12 +7,13 @@ Content-Type: application/json
 }
 
 > {% client.global.set("token", response.headers.valueOf("token")); %}
-###
+### token为空。未登录请求
 GET  http://localhost:8080/api/example06/admin/welcome
 
-###
+### 手动模拟合法token与role测试
 GET  http://localhost:8080/api/example06/admin/welcome
-token: 0d3924b168a69a07a3c3172a0f9aa115dfbce48719d7ba1626be7e96dfec63e0813ea6da0a5aae8c021c876be580750f
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI5ODQxNjYyMTU4OCIsInJvbGUiOiJVOGdSNSIsImlhdCI6MTcxMzc3NzgwMCwiZXhwIjoxNzEzNzc3ODk0fQ.sEOw-6KO5FSfqmGk7iTOmaowvs2GZHM-PTfrimGOlSw
+role: U8gR5
 
 ### 基于脚本自动获取token数据。便于测试
 GET  http://localhost:8080/api/example06/admin/welcome

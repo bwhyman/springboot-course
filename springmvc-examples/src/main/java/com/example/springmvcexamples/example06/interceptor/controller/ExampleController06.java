@@ -33,7 +33,8 @@ public class ExampleController06 {
         log.debug(result);
         // 以指定键值对，置于响应header
         response.addHeader("token", result);
-        return ResultVO.ok();
+        response.addHeader("role", u.getRole());
+        return ResultVO.success(Map.of("user", u));
     }
 
     @GetMapping("admin/welcome")

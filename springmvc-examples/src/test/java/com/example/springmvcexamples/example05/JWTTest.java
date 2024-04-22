@@ -22,6 +22,7 @@ public class JWTTest {
         String  uid = jwtComponent.decode(token).getClaim("uid").asString();
         log.debug("{}", uid);
 
+        // jwt组件中过期时间
         Thread.sleep(15000);
         String uid2 = jwtComponent.decode(token).getClaim("uid").asString();
         log.debug("{}", uid2);
