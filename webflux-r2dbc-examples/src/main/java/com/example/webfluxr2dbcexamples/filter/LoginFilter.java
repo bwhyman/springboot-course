@@ -2,7 +2,6 @@ package com.example.webfluxr2dbcexamples.filter;
 
 import com.example.webfluxr2dbcexamples.component.JWTComponent;
 import com.example.webfluxr2dbcexamples.exception.Code;
-import com.example.webfluxr2dbcexamples.exception.XException;
 import com.example.webfluxr2dbcexamples.vo.RequestConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +50,6 @@ public class LoginFilter  implements WebFilter {
                     attributes.put(RequestConstant.UID, decode.getClaim(RequestConstant.UID).asString());
                     attributes.put(RequestConstant.ROLE, decode.getClaim(RequestConstant.ROLE).asString());
                     return chain.filter(exchange);
-                })
-                .onErrorResume(e -> responseHelper.response(((XException) e).getCode(), exchange));
+                });
     }
 }
