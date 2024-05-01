@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        heartbeat:
+          enabled: true # 启动心跳检测。不启动consul控制台显式checks错误

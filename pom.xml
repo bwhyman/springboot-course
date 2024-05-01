@@ -16,5 +16,6 @@
         <module>cache-examples</module>
         <module>redis-examples</module>
         <module>webflux-r2dbc-examples</module>
+        <module>consul-examples</module>
     </modules>
 </project>

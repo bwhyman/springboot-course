@@ -45,6 +45,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - /cache-examples
 - /redis-examples
 - /webflux-r2dbc-examples
+- /consul-examples
 - /backend-jdbc-examples，为前端项目提供模拟数据互交
 
 ### Online Tutorials
