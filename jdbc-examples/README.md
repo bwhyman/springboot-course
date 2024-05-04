@@ -99,6 +99,9 @@ CrudRepository<T, ID>接口，提供了针对DO类的基本CRUD操作方法。T�
 - `void delete(T entity)/deleteById(ID id)/deleteAll()/deleteAllById(Iterable<ID> ids)`
 - `boolean existsById(ID id)`
 
+#### Pagination & Sorted
+基于MySQL limit语句实现分页  
+基于Pageable接口计算limit offset size等数据  
 
 #### RowMapper & ResultSetExtractor
 通过自定义映射类，可以实现将一次多表关联查询的结果集，部分结果映射为集合，部分映射为普通属性，封装在dto。  

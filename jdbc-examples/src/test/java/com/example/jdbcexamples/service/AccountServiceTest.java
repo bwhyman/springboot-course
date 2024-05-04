@@ -1,8 +1,7 @@
-package com.example.jdbcexamples;
+package com.example.jdbcexamples.service;
 
 import com.example.jdbcexamples.dox.Account;
 import com.example.jdbcexamples.repository.AccountRepository;
-import com.example.jdbcexamples.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

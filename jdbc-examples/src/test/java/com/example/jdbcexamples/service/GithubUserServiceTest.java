@@ -1,8 +1,7 @@
-package com.example.jdbcexamples;
+package com.example.jdbcexamples.service;
 
 import com.example.jdbcexamples.dox.GithubUser;
 import com.example.jdbcexamples.repository.GithubUserRepository;
-import com.example.jdbcexamples.service.GithubUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class GithubUserServiceTest {
+class GithubUserServiceTest {
     @Autowired
     private GithubUserService githubUserService;
     @Autowired
@@ -29,7 +28,7 @@ public class GithubUserServiceTest {
     }
 
     @Test
-    public void a() {
+    public void listGithubUsers() {
         GithubUser user = GithubUser.builder()
                 .gender("male")
                 .build();

@@ -13,9 +13,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GithubUserService {
     private final GithubUserRepository githubUserRepository;
+    private final ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
 
     public List<GithubUser> listGithubUsers(GithubUser optional) {
-        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase();
         Example<GithubUser> example = Example.of(optional, matcher);
         return (List<GithubUser>) githubUserRepository.findAll(example);
     }
