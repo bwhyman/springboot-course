@@ -129,6 +129,20 @@ save()方法会更新全部属性字段。即，对象的空值属性也会更�
 #### QueryByExampleExecutor
 QueryByExampleExecutor接口支持简单的基于字符串的动态查询语句，例如，开始/结束/首字母/忽略大小写等，不支持数值比较等复杂操作。
 
+#### BeforeConvertCallback
+通过BeforeConvertCallback回调接口，在save()方法保存数据时填充主键。有点麻烦。  
+```java
+@Bean
+BeforeConvertCallback<User> beforeConvertCallback() {
+    return aggregate -> {
+        if (aggregate.getId().isEmpty()) {
+            aggregate.setId(getId());
+        }
+        return aggregate;
+    };
+}
+```
+
 #### VS mybatis-plus
 优点：切换到r2dbc很方便；可自定义映射类型无需xml配置；也支持乐观锁版本控制属性；简单直观；  
 缺点：没有代码逆向生成；缺少开箱即用的主键生成实现；不支持局部更新；不支持动态拼接查询语句；没有丰富的功能插件；   

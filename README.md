@@ -4,10 +4,8 @@
 
 China, Northeast Forestry University, Software Engineering, Frameworks for Web Application.
 
-Web系统框架，是东北林业大学软件工程专业第6学期的一门专业选修课。课程包含32+16学时。  
+Web系统框架，是东北林业大学软件工程专业第5学期的一门专业选修课。课程包含32+16学时。  
 主讲教师：王波老师。  
-部分技术基础框架版本已经过时，同时为适应纯后端框架技术课程需要，移除课程不再讲解的技术知识。  
-`jpa/mybatis/mongodb/reactive-redis/rocketmq/gateway/nacos`等。
 
 课程基于Springboot/spring Cloud框架的后端微服务架构、设计思想与实现技术。  
 课程的具体技术内容包括：
@@ -32,7 +30,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 开发环境/框架及版本：
 - IntelliJ IDEA Ultimate
 - OpenJDK ^17
-- Springboot ^3.2
+- Springboot ^3.3
 - Git ^2.4
 - MySQL ^8.0
 - Redis Stack ^7
@@ -72,3 +70,7 @@ Web系统框架，是东北林业大学软件工程专业第6学期的一门专�
 - https://github.com/bwhyman/springboot-course
 - https://github.com/bwhyman/vite-vue3-examples
 - https://github.com/bwhyman/flutter_examples
+
+### Updates
+#### 2024.06.28
+在maven父模块声明全局依赖，便于子项目统一springboot版本。
