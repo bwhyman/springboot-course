@@ -12,9 +12,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cache-examples</name>
 	<description>cache-examples</description>
-	<properties>
-		<java.version>${java.version}</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>

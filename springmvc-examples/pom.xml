@@ -12,9 +12,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springmvc-examples</name>
 	<description>springmvc-examples</description>
-	<properties>
-		<java.version>${java.version}</java.version>
-	</properties>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
