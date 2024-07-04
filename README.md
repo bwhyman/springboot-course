@@ -11,7 +11,8 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 课程的具体技术内容包括：
 - 基于spring-data-jdbc的半自动面向对象持久化技术
 - 基于MySQL的关系型/非关系型混合开发技术
-- 基于SpringMVC框架的控制层技术
+- 基于springmvc框架的控制层技术
+- 基于springdoc-openapi框架的API接口文档生成技术
 - 基于Spring框架的业务逻辑层技术
 - 基于spring-security框架的安全服务技术
 - 基于JWT/自定义加密数据的分布式单点登录鉴权技术

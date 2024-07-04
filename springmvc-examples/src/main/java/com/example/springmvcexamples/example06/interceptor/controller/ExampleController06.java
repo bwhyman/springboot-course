@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example06.interceptor.controller;
 
-import com.example.springmvcexamples.example05.jwt.JWTComponent;
+import com.example.springmvcexamples.component.JWTComponent;
 import com.example.springmvcexamples.example06.interceptor.entity.User06;
 import com.example.springmvcexamples.example06.interceptor.service.UserService06;
 import com.example.springmvcexamples.exception.Code;

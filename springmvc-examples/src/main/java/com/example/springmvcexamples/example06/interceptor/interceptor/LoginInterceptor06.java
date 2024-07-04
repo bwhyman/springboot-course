@@ -3,7 +3,7 @@ package com.example.springmvcexamples.example06.interceptor.interceptor;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.exception.XException;
-import com.example.springmvcexamples.example05.jwt.JWTComponent;
+import com.example.springmvcexamples.component.JWTComponent;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

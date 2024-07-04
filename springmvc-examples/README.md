@@ -20,3 +20,9 @@ public static final String USER = "oI6pz";
 ```
 
 ### example07 Timer
+
+### example08 SpringDoc
+api文档默认访问地址  
+http://localhost:8080/swagger-ui/index.html
+
+https://springdoc.org/#how-do-i-add-authorization-header-in-requests

@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example05;
 
-import com.example.springmvcexamples.example05.jwt.JWTComponent;
+import com.example.springmvcexamples.component.JWTComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

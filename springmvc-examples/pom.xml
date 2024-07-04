@@ -12,8 +12,17 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springmvc-examples</name>
 	<description>springmvc-examples</description>
+	<properties>
+		<java.version>${java.version}</java.version>
+	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.6.0</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
 		<dependency>
 			<groupId>com.auth0</groupId>

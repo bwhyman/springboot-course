@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example05.jwt;
+package com.example.springmvcexamples.component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
