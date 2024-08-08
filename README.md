@@ -30,7 +30,7 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 ### Development Environments
 开发环境/框架及版本：
 - IntelliJ IDEA Ultimate
-- OpenJDK ^17
+- OpenJDK ^21
 - Springboot ^3.3
 - Git ^2.4
 - MySQL ^8.0
@@ -73,5 +73,8 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - https://github.com/bwhyman/flutter_examples
 
 ### Updates
+#### 2024.08.06
+升级到Java:21+springboot:3.3.1
+
 #### 2024.06.28
 在maven父模块声明全局依赖，便于子项目统一springboot版本。
