@@ -1,6 +1,6 @@
 package com.example.cacheexamples.service;
 
-import com.example.cacheexamples.entity.User;
+import com.example.cacheexamples.dto.User;
 import com.example.cacheexamples.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

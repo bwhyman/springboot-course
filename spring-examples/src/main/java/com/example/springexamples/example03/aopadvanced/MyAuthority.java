@@ -6,9 +6,8 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface MyAuthority {
     MyAuthorityType[] value() default MyAuthorityType.USER;
-    String key() default "";
 
-    public enum MyAuthorityType {
-        USER, ADMIN, SUPERADMIN
+    enum MyAuthorityType {
+        USER, ADMIN, SUPER_ADMIN
     }
 }

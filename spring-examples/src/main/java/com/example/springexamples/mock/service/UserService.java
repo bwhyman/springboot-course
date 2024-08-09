@@ -2,7 +2,7 @@ package com.example.springexamples.mock.service;
 
 
 import com.example.springexamples.mock.dox.User;
-import com.example.springexamples.mock.repository.UserRepository;
+import com.example.springexamples.mock.repository.UserRepositoryMock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
+    private final UserRepositoryMock userRepositoryMock;
 
     public User addUser(User user) {
-        return userRepository.save(user);
+        return userRepositoryMock.save(user);
     }
 
     public User getUser(String uid) {
-        return userRepository.findById(uid);
+        return userRepositoryMock.findById(uid);
     }
 
 }

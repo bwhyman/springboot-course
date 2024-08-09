@@ -1,4 +1,4 @@
-package com.example.cacheexamples.entity;
+package com.example.cacheexamples.dto;
 
 import lombok.*;
 

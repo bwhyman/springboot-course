@@ -1,7 +1,7 @@
 package com.example.springexamples.mock;
 
 import com.example.springexamples.mock.dox.User;
-import com.example.springexamples.mock.repository.UserRepository;
+import com.example.springexamples.mock.repository.UserRepositoryMock;
 import com.example.springexamples.mock.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,14 +16,14 @@ import java.util.List;
 @Slf4j
 class UserServiceTest {
     @MockBean
-    private UserRepository userRepository;
+    private UserRepositoryMock userRepositoryMock;
     @Autowired
     private UserService userService;
 
     @Test
     void getUser() {
         // 模拟调用findById()方法，参数为`1`时，返回指定对象
-        Mockito.when(userRepository.findById("1"))
+        Mockito.when(userRepositoryMock.findById("1"))
                 .thenReturn(User.builder().id("1").name("BO").build());
         User u = userService.getUser("1");
         log.debug("{}", u);
@@ -34,7 +34,7 @@ class UserServiceTest {
 
     @Test
     void addUser() {
-        Mockito.when(userRepository.save(Mockito.any()))
+        Mockito.when(userRepositoryMock.save(Mockito.any()))
                 .thenReturn(User.builder().id("1").name("BO").build());
         User u = userService.addUser(User.builder().name("any").build());
         log.debug("{}", u);
@@ -44,7 +44,7 @@ class UserServiceTest {
     void getUser2() {
         List<User> users = List.of(User.builder().id("1").name("BO").build(), User.builder().id("2").name("SUN").build());
         // 获取调用Mock组件时传入的参数，操作并返回结果对象
-        Mockito.when(userRepository.findById(Mockito.anyString()))
+        Mockito.when(userRepositoryMock.findById(Mockito.anyString()))
                 .thenAnswer(answer -> {
                     String uid = answer.getArgument(0);
                     return users.stream()

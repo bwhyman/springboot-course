@@ -1,7 +1,9 @@
 package com.example.springexamples.example03;
 
 import com.example.springexamples.example03.aopadvanced.AOPService03;
+import com.example.springexamples.exception.XException;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,7 @@ public class AOPServiceTest {
 
     @Test
     public void test_getAdmin() {
+        // Assertions.assertThrows(XException.class, () -> aopService03.getAdmin());
         aopService03.getAdmin();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 
 @SpringBootTest
@@ -25,11 +26,19 @@ class OrderServiceTest {
     }
 
     @Test
-    void rushBuyTest() {
+    void rushBuyTest() throws InterruptedException {
         // 模拟抢购的商品，抢购用户
         Item item = Item.builder().id("01HN7JNHG93N3RSPF60MEG4WE2").build();
-        var userId = "152";
-        long quantity = orderService.rushBuy(item, userId);
-        log.debug("剩余数量：{}", quantity);
+        final int AMOUNT = 200;
+        CountDownLatch latch = new CountDownLatch(AMOUNT);
+        for (int i = 0; i < AMOUNT; i++) {
+            int x = i;
+            Thread.ofVirtual().start(() -> {
+                long quantity = orderService.rushBuy(item, String.valueOf(x));
+                log.debug("剩余数量：{}", quantity);
+                latch.countDown();
+            });
+        }
+        latch.await();
     }
 }

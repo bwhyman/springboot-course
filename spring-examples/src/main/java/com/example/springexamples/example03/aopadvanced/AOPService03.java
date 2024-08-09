@@ -8,9 +8,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AOPService03 {
     public void getUser() {
+        log.debug("getUser()");
     }
 
-    @MyAuthority(value = MyAuthority.MyAuthorityType.ADMIN)
+    @MyAuthority(value = {
+            MyAuthority.MyAuthorityType.ADMIN,
+            MyAuthority.MyAuthorityType.SUPER_ADMIN})
     public void getAdmin() {
+        log.debug("getAdmin()");
     }
 }

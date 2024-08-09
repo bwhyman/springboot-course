@@ -1,6 +1,6 @@
 package com.example.cacheexamples.repository;
 
-import com.example.cacheexamples.entity.User;
+import com.example.cacheexamples.dto.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
