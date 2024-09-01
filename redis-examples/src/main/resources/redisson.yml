@@ -1,7 +1,7 @@
 singleServerConfig:
-  address: redis://116.63.13.220:3390
+  address: redis://127.0.0.1:6379
   username: default
   password: 2046
   database: 0
-#  改为默认按字符串序列化
+#  改为全局默认按字符串序列化
 # codec: !<org.redisson.client.codec.StringCodec> {}
