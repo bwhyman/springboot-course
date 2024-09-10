@@ -6,7 +6,7 @@ spring:
     pool:
       enabled: true
       initial-size: 1
-      validation-query: select 1
+
   sql:
     init:
       mode: always
