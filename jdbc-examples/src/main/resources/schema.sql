@@ -1,3 +1,7 @@
+/*
+    使用idea `ctrl+/`创建的`#`注释是错误的
+    应使用类似Java的注解。`ctrl+shift+/`
+*/
 create table if not exists `user`
 (
     id          char(19) not null primary key,
@@ -25,6 +29,15 @@ create table if not exists `account`
     name    varchar(20),
     balance float,
     version int default 0
+);
+/*
+  悲观锁
+*/
+create table if not exists `account_pess`
+(
+    id      char(19) not null primary key,
+    name    varchar(20),
+    balance float
 );
 /**
   动态查询

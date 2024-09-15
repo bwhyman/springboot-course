@@ -4,7 +4,7 @@ spring:
     username: 2046204601
     password: 2046204601
     hikari:
-      maximum-pool-size: 1
+      maximum-pool-size: 5
   sql:
     init:
       mode: always
