@@ -58,7 +58,7 @@ class AddressRepositoryTest {
 
     @Test
     void findAddressUserById() {
-        AddressUser addressUser = addressRepository.findAddressUserById("1530375756270878722");
+        AddressUser addressUser = addressRepository.findAddressUserById("1283819168057049188");
         log.debug(addressUser.toString());
     }
 

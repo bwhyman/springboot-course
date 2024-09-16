@@ -21,7 +21,8 @@ public interface AddressRepository extends CrudRepository<Address, String> {
     List<Address> findByUserId(String uid);
 
     @Query("""
-            select a.id as id, a.detail as detail, u.name as name, a.create_time as create_time, a.update_time as update_time, a.user_id as user_id
+            select a.id as id, a.detail as detail, u.name as name, a.create_time as create_time,
+            a.update_time as update_time, a.user_id as user_id
             from address a join user u on u.id = a.user_id
             where a.id=:aid
             """)

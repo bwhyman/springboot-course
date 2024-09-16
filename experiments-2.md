@@ -15,6 +15,7 @@
 打开idea database视图，添加连接远程数据库。  
 执行脚本生成测试数据表。  
 编写user表对应的DO类，按映射规则声明属性。  
+编写雪花算法注入实现。  
 编写操作DO类的Repository组件。  
 编写测试类，注入Repository组件，执行增删改等持久化方法。  
 测试事务  
@@ -30,14 +31,14 @@
 结合上一实验内容。  
 在schema脚本添加user/address，声明若干字段，并添加至数据库。  
 在address包含user表主键并设置为索引；user one-to-many address，address one-to-one user。  
-编写repository接口。  
-模拟1个user，对应2个address。  
-按需创建不同方式封装user/address中信息的DTO类。  
+编写userRepository/AddressRepository接口。  
+编写测试用例，添加若干user记录，以及user对应的address记录。  
 实现以下查询
-
 - 基于userid，查询全部address信息，通过address repository查询即可
-- 基于addressid，查询address信息以及user信息，需DTO
-- 基于userid，查询user信息，以及全部address信息，需DTO
+- 基于addressid，查询address信息以及user信息，通过RowMapper实现。需DTO
+- 基于userid，查询user信息，以及全部address信息，通过ResultSetExtractor实现。需DTO
+
+按需创建不同方式封装user/address中信息的DTO类。  
 
 编写测试类测试
 

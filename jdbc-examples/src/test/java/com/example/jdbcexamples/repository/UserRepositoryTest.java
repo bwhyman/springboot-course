@@ -1,6 +1,7 @@
 package com.example.jdbcexamples.repository;
 
 import com.example.jdbcexamples.dox.User;
+import com.example.jdbcexamples.dto.AddressUser;
 import com.example.jdbcexamples.dto.UserAddress;
 import com.example.jdbcexamples.dto.UserAddress3;
 import lombok.extern.slf4j.Slf4j;
@@ -30,17 +31,11 @@ class UserRepositoryTest {
     }
 
     @Test
-    void findAddressesById() {
-        userRepository.findAddressesById("1232286686092951552")
-                .forEach(System.out::println);
-    }
-
-    @Test
     void findAll() {
         int pageSize = 5;
         int page = 4;
         userRepository.findAll((page - 1) * pageSize, 5)
-                .forEach(System.out::println);
+                .forEach(user -> log.debug(user.toString()));
     }
 
     @Test
@@ -49,7 +44,7 @@ class UserRepositoryTest {
         int page = 4;
         Pageable pageable = PageRequest.of(page - 1, pageSize);
         userRepository.findAll(pageable)
-                .forEach(System.out::println);
+                .forEach(user -> log.debug(user.toString()));
     }
 
     @Test
@@ -58,13 +53,13 @@ class UserRepositoryTest {
         int page = 1;
         Pageable pageable = PageRequest.of(page - 1, pageSize);
         userRepository.findByIdDesc(pageable)
-                .forEach(System.out::println);
+                .forEach(user -> log.debug(user.toString()));
     }
 
     @Test
     void findAddressUser() {
-        userRepository.findAddressUser("1057571239761793024")
-                .forEach(addressUser -> log.debug("{}", addressUser));
+        AddressUser addreddUser = userRepository.findByAddressId("1057571239761793024");
+        log.debug(addreddUser.toString());
     }
 
     @Test
