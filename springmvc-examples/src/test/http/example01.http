@@ -30,4 +30,8 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/example01/inject
 
+###
+GET http://localhost:8080/api/example01/addresses-pages
 
+###
+GET http://localhost:8080/api/example01/addresses-pages/2

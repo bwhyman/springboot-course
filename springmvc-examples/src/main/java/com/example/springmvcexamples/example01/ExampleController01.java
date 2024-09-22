@@ -9,9 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -55,6 +57,17 @@ public class ExampleController01 {
             return ResultVO.success(Map.of());
         }
         return ResultVO.success(Map.of("address", address));
+    }
+
+    // 无参的默认请求为第一页
+    // 因为路径与以上冲突，单独命名
+    @GetMapping({"addresses-pages", "addresses-pages/{number}"})
+    public ResultVO getAddressesPage(@PathVariable Optional<Integer> number) {
+        // 如果不存在，默认为第一页
+        int pateNumber = number.orElse(1);
+        log.debug("page number: {}", pateNumber);
+        // 可基于RequestPage封装分页信息
+        return ResultVO.success(Map.of("addresses", ADDRESSES));
     }
 
     @GetMapping("inject")

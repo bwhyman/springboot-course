@@ -25,18 +25,21 @@
 理解仅索引非外键关系的作用。  
 掌握编写关联查询语句的方法。  
 掌握关联查询的声明使用方法。  
+掌握基于Explain的SQL语句分析与优化。  
 掌握基于RowMapper/ResultSetExtractor接口的结果集映射方法。  
 
 **实验内容**   
 结合上一实验内容。  
-在schema脚本添加user/address，声明若干字段，并添加至数据库。  
-在address包含user表主键并设置为索引；user one-to-many address，address one-to-one user。  
-编写userRepository/AddressRepository接口。  
+在schema脚本添加user/address数据表，声明若干字段。  
+在address包含user表主键并设置为索引；user 1:N address，address 1:1 user。  
+项目声明数据源/启动执行schema脚本/logging等基本配置。  
+编写持久层组件userRepository/AddressRepository接口。  
 编写测试用例，添加若干user记录，以及user对应的address记录。  
-实现以下查询
+
+实现以下数据检索，且需先通过explain分析预执行的SQL语句，验证检索方式是否符合预期后再在组件实现。
 - 基于userid，查询全部address信息，通过address repository查询即可
-- 基于addressid，查询address信息以及user信息，通过RowMapper实现。需DTO
-- 基于userid，查询user信息，以及全部address信息，通过ResultSetExtractor实现。需DTO
+- 基于addressid，查询address信息以及user信息，通过RowMapper映射行实现。需DTO
+- 基于userid，查询user信息，以及全部address信息，通过ResultSetExtractor映射全部结果集实现。需DTO
 
 按需创建不同方式封装user/address中信息的DTO类。  
 
