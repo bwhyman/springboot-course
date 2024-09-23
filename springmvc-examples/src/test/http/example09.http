@@ -1,0 +1,16 @@
+### 模拟脚本复杂，实际JS请求简单
+POST http://localhost:8080/api/example09/upload/infos
+Content-Type: multipart/form-data;charset=utf-8 boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="pname";
+Content-Type: text/plain
+
+表单的其他附属信息
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="实验报告.docx"
+Content-Type: */*
+
+< E:/test/testing.mp4
+--WebAppBoundary--
+###

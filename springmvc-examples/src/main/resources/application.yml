@@ -1,7 +1,10 @@
 spring:
   jackson:
     default-property-inclusion: non_null # 序列化时忽略空属性值
-
+  servlet:
+    multipart:
+      max-file-size: -1 # 单文件下载大小限制
+      max-request-size: -1 # 单文件上传大小限制
 
 logging:
   level:
@@ -13,4 +16,3 @@ logging:
 
 my:
   secretkey: R28K42ZEJ8LWRHU5
-  salt: 636eac2534bcfcb0
