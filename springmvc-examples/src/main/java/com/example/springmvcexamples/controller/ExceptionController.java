@@ -19,7 +19,7 @@ import java.util.Set;
 @Order(2)
 @Slf4j
 @RestControllerAdvice
-public class ExceptionHandle {
+public class ExceptionController {
     @ExceptionHandler(XException.class)
     public ResultVO handleValidException(XException exception) {
         // 如果直接封装了通用错误信息
@@ -102,7 +102,7 @@ public class ExceptionHandle {
     }
 
     // 兜底异常处理
-    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     public ResultVO handleException(Exception exception) {
         return ResultVO.error(Code.ERROR, exception.getMessage());
     }
