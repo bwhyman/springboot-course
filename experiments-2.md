@@ -66,9 +66,9 @@
 添加log/jackson忽略空属性等基本配置。  
 
 在exception包下，自定义枚举类型通用异常业务码。  
-在vo包下，创建ResultVO类，统一封装通用响应数据，包括：响应数据/响应空数据。  
+在vo包下，创建ResultVO类，统一封装通用响应数据，包括：响应数据/响应空数据/异常业务数据等。  
 
-在dox包下，创建User类，添加id/name/account/password/createTime等属性，为密码属性添加序列化忽略注解。  
+在dox包下，创建User类，添加id/name/account/password/createTime等属性。  
 在service包下，创建UserService组件，模拟一个包含若干user对象的集合
 
 - 获取全部users集合对象业务方法，listUsers()
@@ -102,11 +102,11 @@
 扩展配置，自定义token密钥。  
 
 在exception包下，自定义unchecked异常，包括处理通用业务异常，以及自定义异常信息。  
-在vo包下，扩展ResultVO类，添加响应异常数据信息等。  
-扩展User类，追加role属性，以及USER/ADMIN常量。
 在controller包下，创建ExceptionController组件，统一处理异常信息。  
 在component包下，创建PasswordEncoderConfig配置类，创建基于BCryptPasswordEncoder算法的PasswordEncoder组件。
-在component包下，创建JWTComponent组件，注入配置中密钥，实现token的加密/解密。
+在component包下，创建JWTComponent组件，注入配置中密钥，实现token的加密/解密。  
+
+扩展User类，追加role属性，以及USER/ADMIN常量，为密码属性添加序列化忽略注解。  
 
 扩展UserService组件中集合对象数据，密码`123456`的一个编码。
 

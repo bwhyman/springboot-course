@@ -1,7 +1,7 @@
 package com.example.springmvcexamples.example06.interceptor.service;
 
 
-import com.example.springmvcexamples.example06.interceptor.entity.User06;
+import com.example.springmvcexamples.example06.interceptor.dox.User06;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

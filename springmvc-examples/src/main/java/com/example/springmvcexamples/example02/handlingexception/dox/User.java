@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example02.handlingexception.entity;
+package com.example.springmvcexamples.example02.handlingexception.dox;
 
 import lombok.Data;
 

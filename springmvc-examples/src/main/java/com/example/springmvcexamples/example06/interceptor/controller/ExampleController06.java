@@ -1,7 +1,7 @@
 package com.example.springmvcexamples.example06.interceptor.controller;
 
 import com.example.springmvcexamples.component.JWTComponent;
-import com.example.springmvcexamples.example06.interceptor.entity.User06;
+import com.example.springmvcexamples.example06.interceptor.dox.User06;
 import com.example.springmvcexamples.example06.interceptor.service.UserService06;
 import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.vo.ResultVO;
@@ -34,7 +34,7 @@ public class ExampleController06 {
         // 以指定键值对，置于响应header
         response.addHeader("token", result);
         response.addHeader("role", u.getRole());
-        return ResultVO.success(Map.of("user", u));
+        return ResultVO.success(u);
     }
 
     @GetMapping("admin/welcome")

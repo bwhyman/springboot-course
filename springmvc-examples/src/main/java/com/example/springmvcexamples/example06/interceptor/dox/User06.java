@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example06.interceptor.entity;
+package com.example.springmvcexamples.example06.interceptor.dox;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

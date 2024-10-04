@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example03.beanvalidation.controller;
 
-import com.example.springmvcexamples.example03.beanvalidation.entity.User03;
+import com.example.springmvcexamples.example03.beanvalidation.dox.User03;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example03.beanvalidation.entity;
+package com.example.springmvcexamples.example03.beanvalidation.dox;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User03 {
-    private int id;
+    private String id;
     @Size(min = 2, max = 6,
             message = "您输入的值为${validatedValue}，用户名长度必须大于{min}，小于{max}")
     private String name;

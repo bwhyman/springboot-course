@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example04.passwordencoder.service;
 
-import com.example.springmvcexamples.example04.passwordencoder.entity.User04;
+import com.example.springmvcexamples.example04.passwordencoder.dox.User04;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

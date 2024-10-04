@@ -1,7 +1,7 @@
 package com.example.springmvcexamples.example04.passwordencoder.controller;
 
 
-import com.example.springmvcexamples.example04.passwordencoder.entity.User04;
+import com.example.springmvcexamples.example04.passwordencoder.dox.User04;
 import com.example.springmvcexamples.example04.passwordencoder.service.UserService04;
 import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.vo.ResultVO;
@@ -34,6 +34,6 @@ public class ExampleController04 {
         }
         // 登录成功，添加token等操作
         log.debug("登录成功");
-        return ResultVO.success(Map.of("user", u));
+        return ResultVO.success(u);
     }
 }

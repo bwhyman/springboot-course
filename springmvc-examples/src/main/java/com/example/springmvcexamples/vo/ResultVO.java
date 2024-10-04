@@ -11,7 +11,7 @@ import java.util.Map;
 public class ResultVO {
     private int code;
     private String message;
-    private Map<String, Object> data;
+    private Object data;
 
     private static final ResultVO EMPTY = ResultVO.builder()
             .code(200)
@@ -22,20 +22,8 @@ public class ResultVO {
         return EMPTY;
     }
 
-    public static ResultVO success(Map<String, Object> data) {
+    public static ResultVO success(Object data) {
         return ResultVO.builder().code(200).data(data).build();
-    }
-
-    public static ResultVO success(Code code, Map<String, Object> data) {
-        return ResultVO.builder()
-                .code(code.getCode())
-                .message(code.getMessage())
-                .data(data)
-                .build();
-    }
-
-    public static ResultVO error(int code, String msg) {
-        return ResultVO.builder().code(code).message(msg).build();
     }
 
     public static ResultVO error(Code code) {
@@ -44,4 +32,9 @@ public class ResultVO {
                 .message(code.getMessage())
                 .build();
     }
+
+    public static ResultVO error(int code, String msg) {
+        return ResultVO.builder().code(code).message(msg).build();
+    }
+
 }

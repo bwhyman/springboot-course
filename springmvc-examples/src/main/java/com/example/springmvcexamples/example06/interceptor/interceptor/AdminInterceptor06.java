@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example06.interceptor.interceptor;
 
-import com.example.springmvcexamples.example06.interceptor.entity.User06;
+import com.example.springmvcexamples.example06.interceptor.dox.User06;
 import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.exception.XException;
 import jakarta.servlet.http.HttpServletRequest;

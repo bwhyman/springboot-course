@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example04.passwordencoder.entity;
+package com.example.springmvcexamples.example04.passwordencoder.dox;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

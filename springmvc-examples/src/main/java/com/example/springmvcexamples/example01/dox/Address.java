@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example01.dto;
+package com.example.springmvcexamples.example01.dox;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Address {
-    private Integer id;
+    private String id;
     private String detail;
     private String comment;
     private User user;

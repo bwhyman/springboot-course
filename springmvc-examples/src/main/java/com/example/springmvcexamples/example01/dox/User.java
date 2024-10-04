@@ -1,4 +1,4 @@
-package com.example.springmvcexamples.example01.dto;
+package com.example.springmvcexamples.example01.dox;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class User {
-    private Integer id;
+    private String id;
 }

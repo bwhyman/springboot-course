@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example01;
 
-import com.example.springmvcexamples.example01.dto.Address;
+import com.example.springmvcexamples.example01.dox.Address;
 import com.example.springmvcexamples.vo.ResultVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +26,14 @@ public class ExampleController01 {
 
     @GetMapping("addresses")
     public ResultVO getAddresses() {
-        return ResultVO.success(Map.of("addresses", ADDRESSES));
+        return ResultVO.success(ADDRESSES);
     }
 
     @PostMapping("addresses")
     public ResultVO postAddress(@RequestBody Address address) {
         log.debug(address.getDetail());
         log.debug(address.getComment());
-        return ResultVO.success(Map.of());
+        return ResultVO.ok();
     }
 
     @PostMapping("addresses02")
@@ -42,21 +41,16 @@ public class ExampleController01 {
         log.debug(address.getDetail());
         log.debug(address.getComment());
         log.debug("{}", address.getUser().getId());
-        return ResultVO.success(Map.of());
+        return ResultVO.ok();
     }
 
     @GetMapping("addresses/{aid}")
-    public ResultVO getAddress(@PathVariable int aid) {
+    public ResultVO getAddress(@PathVariable String aid) {
         Address address = ADDRESSES.stream()
-                .filter(a -> a.getId() == aid)
+                .filter(a -> a.getId().equals(aid))
                 .findFirst()
                 .orElse(null);
-        if(address == null) {
-            //return ResultVO.error(404, "地址不存在");
-            // Map.of()禁止空对象
-            return ResultVO.success(Map.of());
-        }
-        return ResultVO.success(Map.of("address", address));
+        return ResultVO.success(address);
     }
 
     // 无参的默认请求为第一页
@@ -67,7 +61,7 @@ public class ExampleController01 {
         int pateNumber = number.orElse(1);
         log.debug("page number: {}", pateNumber);
         // 可基于RequestPage封装分页信息
-        return ResultVO.success(Map.of("addresses", ADDRESSES));
+        return ResultVO.success(ADDRESSES);
     }
 
     @GetMapping("inject")
@@ -82,13 +76,13 @@ public class ExampleController01 {
 
     private List<Address> create() {
         Address a1 = Address.builder()
-                .id(1).detail("956").inertTime(LocalDateTime.now())
+                .id("1").detail("956").inertTime(LocalDateTime.now())
                 .build();
         Address a2 = Address.builder()
-                .id(2).detail("925").inertTime(LocalDateTime.now())
+                .id("2").detail("925").inertTime(LocalDateTime.now())
                 .build();
         Address a3 = Address.builder()
-                .id(3).detail("121").inertTime(LocalDateTime.now())
+                .id("3").detail("121").inertTime(LocalDateTime.now())
                 .build();
         return List.of(a1, a2, a3);
     }

@@ -1,6 +1,6 @@
 package com.example.springmvcexamples.example02.handlingexception.controller;
 
-import com.example.springmvcexamples.example02.handlingexception.entity.User;
+import com.example.springmvcexamples.example02.handlingexception.dox.User;
 import com.example.springmvcexamples.example02.handlingexception.service.UserService02;
 import com.example.springmvcexamples.exception.Code;
 import com.example.springmvcexamples.vo.ResultVO;
