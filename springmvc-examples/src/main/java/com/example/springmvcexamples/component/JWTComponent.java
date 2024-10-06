@@ -18,8 +18,6 @@ import java.util.Map;
 
 @Component
 public class JWTComponent {
-    // 1ds过期
-    private final LocalDateTime time = LocalDateTime.now().plusDays(1);
     // 私钥
     @Value("${my.secretkey}")
     private String secretkey;
@@ -30,6 +28,8 @@ public class JWTComponent {
         algorithm = Algorithm.HMAC256(secretkey);
     }
     public String encode(Map<String, Object> map) {
+        // 1ds过期
+       LocalDateTime time = LocalDateTime.now().plusDays(1);
         return JWT.create()
                 .withPayload(map)
                 .withIssuedAt(new Date())

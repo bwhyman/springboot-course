@@ -1,6 +1,7 @@
 package com.example.springmvcexamples.example01;
 
 import com.example.springmvcexamples.example01.dox.Address;
+import com.example.springmvcexamples.example01.dox.User;
 import com.example.springmvcexamples.vo.ResultVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +28,13 @@ public class ExampleController01 {
     @GetMapping("addresses")
     public ResultVO getAddresses() {
         return ResultVO.success(ADDRESSES);
+    }
+
+    @GetMapping("user/addresses")
+    public ResultVO getUserAddresses() {
+        User u = User.builder().id("32").name("BO").build();
+        Map<String, Object> data = Map.of("user", u, "addresses", ADDRESSES);
+        return ResultVO.success(data);
     }
 
     @PostMapping("addresses")

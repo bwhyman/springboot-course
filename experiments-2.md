@@ -108,11 +108,15 @@
 
 扩展User类，追加role属性，以及USER/ADMIN常量，为密码属性添加序列化忽略注解。  
 
-扩展UserService组件中集合对象数据，密码`123456`的一个编码。
+扩展UserService组件中集合对象数据，密码`123456`的一个编码，添加role属性值。
 
 ```shell
 $2a$10$XPz7Kp1kF8NU3vewqqPGn.feT7UPvhoZolvJ1JRi57s16XKMWz9OW
 ```
+
+在interceptor包下，创建LoginInterceptor拦截器，注入JWTComponent组件，拦截除`/api/login`的全部请求，从请求header中获取/解析token数据，将uid置于requestattribute。  
+在interceptor包下，创建Adminnterceptor拦截器，从requestattribute获取当前用户角色权限校验。  
+在component包下，创建WebMvcConfig配置类实现WebMvcConfig接口，重写addInterceptors()方法，注册拦截器，设置拦截规则过滤。
 
 扩展LoginController组件，注入PasswordEncoder/JWTComponent组件。
 
@@ -121,10 +125,6 @@ $2a$10$XPz7Kp1kF8NU3vewqqPGn.feT7UPvhoZolvJ1JRi57s16XKMWz9OW
 创建UserController组件，根路径`/api/user/`。  
 
 - 创建处理`info`路径GET请求方法getInfo()方法，方法从requestattribute注入用户实际id
-
-在interceptor包下，创建LoginInterceptor拦截器，注入JWTComponent组件，拦截除`/api/login`的全部请求，从请求header中获取/解析token数据，将uid置于requestattribute。  
-在interceptor包下，创建Adminnterceptor拦截器，从requestattribute获取当前用户角色权限校验。  
-创建实现WebMvcConfig接口的配置实现类WebMvcConfiguration，重写addInterceptors()方法，注册拦截器，设置拦截规则过滤。  
 
 在test下http目录，创建test.http测试脚本。  
 
@@ -140,7 +140,7 @@ $2a$10$XPz7Kp1kF8NU3vewqqPGn.feT7UPvhoZolvJ1JRi57s16XKMWz9OW
 
 **实验内容**  
 整合实验以理解微服务开发过程为主，可直接从示例/实验中复制代码使用。  
-创建独立的backend-examples微服务，引入lombok/spring-data-jdbc/mysql/springmvc依赖，整理项目。  
+创建独立的backend-examples微服务，引入lombok/spring-data-jdbc/mysql/springmvc/crypto/jwt等依赖，整理项目。  
 
 **初始化**
 
@@ -154,16 +154,16 @@ $2a$10$XPz7Kp1kF8NU3vewqqPGn.feT7UPvhoZolvJ1JRi57s16XKMWz9OW
 
 **实现**
 
-编写schema脚本  
+编写schema脚本。  
 User DO类，声明USER/ADMIN角色常量值。  
-UserRepository持久层组件，实现基于账号获取用户。  
+UserRepository持久层组件，实现基于账号获取用户，单元测试。  
 InitService业务层组件，基于容器监听器实现管理员账号初始化。  
-UserService业务层组件，基于账号获取用户，基于uid获取用户，更新指定uid密码，获取全部用户，添加用户。  
+UserService业务层组件，基于账号获取用户，基于uid获取用户，更新指定uid密码，获取全部用户，添加用户，单元测试。  
 LoginController控制层组件，登录。  
 UserController控制层组件，  更新个人密码。  
 AdminController控制层组件，添加用户，获取全部用户信息，重置指定账号密码。  
 LoginInterceptor拦截器，AdminInterceptor拦截器。  
-编写测试脚本。
+编写请求测试脚本。
 
 ### 实验6 Cache缓存实验
 
