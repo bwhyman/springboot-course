@@ -3,11 +3,11 @@ local field = 'total'
 local function rushBuy(keys, args)
     -- 预操作商品记录的键
     local hkey = keys[1]
-    -- 获取hash记录中的数量字段
-    if redis.call('hget', hkey, field) == 0 then
+    -- 获取hash记录中的数量字段，按字符串比较
+    if redis.call('hget', hkey, field) == '0' then
         return -1
     end
-    -- 还有剩余则减一。返回剩余数量
+    -- 还有剩余则减一，并返回剩余数量
     return redis.call('hincrby', hkey, field, -1)
 end
 redis.register_function('rushBuy', rushBuy)
@@ -15,15 +15,17 @@ redis.register_function('rushBuy', rushBuy)
 -- 判断expireSec秒内，执行超过count次返回flase
 local function expireAPICount(keys, args)
     local hkey = keys[1]
-    -- lua函数参数仅支持传入java string/int类型。字符串可通过tonumber()函数转换
+    -- lua函数参数仅支持传入java string/number类型
+    -- 但均按redis string类型处理
     local expireSec = args[1]
     local count = args[2]
-    -- 键不存在，则为时效内的第一次
+    -- 键不存在，则为时效内的第一次。此处返回数字`0/1`
     if redis.call('exists', hkey) == 0 then
         -- 同时创建记录与过期时间
         redis.call('setex', hkey, expireSec, 1)
         return true
     end
+    -- 按字符串比较
     if redis.call('get', hkey) >= count then
         return false
     end

@@ -12,15 +12,12 @@ public class PasswordEncoderTest {
     @Autowired
     private PasswordEncoder encoder;
 
-    /**
-     * 别忘了，添加junit5运行时依赖
-     */
     @Test
     public void test_password() {
         String pwd = "123456";
-        String result = encoder.encode(pwd);
-        log.debug(result);
         log.debug(encoder.encode(pwd));
+        log.debug(encoder.encode(pwd));
+        String result = encoder.encode(pwd);
         log.debug("{}", encoder.matches("12345", result));
         log.debug("{}", encoder.matches("123456", result));
     }

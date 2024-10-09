@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
 import org.redisson.api.stream.StreamAddArgs;
+import org.redisson.client.codec.Codec;
 import org.redisson.client.codec.IntegerCodec;
 import org.redisson.client.codec.StringCodec;
 import org.springframework.stereotype.Service;
@@ -25,11 +26,11 @@ public class OrderService {
         // 获取操作管道的批处理对象
         RBatch batch = redissonClient.createBatch();
         for (Item item : items) {
-            // 获取操作redis hash对象
-            // 字段值需要计算，以整数存储
+            // 获取操作redis hash对象。以整数序列化
             RMapAsync<String, Integer> map =
                     batch.getMap(Item.PRE_KEY + item.getId(), IntegerCodec.INSTANCE);
-            map.putIfAbsentAsync("total", item.getTotal());
+            // 有则覆盖
+            map.putAsync("total", item.getTotal());
         }
         batch.execute();
     }

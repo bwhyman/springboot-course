@@ -33,7 +33,7 @@ class OrderServiceTest {
         CountDownLatch latch = new CountDownLatch(AMOUNT);
         for (int i = 0; i < AMOUNT; i++) {
             int x = i;
-            Thread.ofVirtual().start(() -> {
+            Thread.startVirtualThread(() -> {
                 long quantity = orderService.rushBuy(item, String.valueOf(x));
                 log.debug("剩余数量：{}", quantity);
                 latch.countDown();
