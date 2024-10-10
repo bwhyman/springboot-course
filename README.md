@@ -34,7 +34,7 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - Springboot ^3.3
 - Git ^2.4
 - MySQL ^8.4
-- Redis Stack ^7
+- Redis Stack ^7.4
 
 ### Examples
 课程代码由单工程多模块组成：

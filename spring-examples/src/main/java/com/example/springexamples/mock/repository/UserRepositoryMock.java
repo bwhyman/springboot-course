@@ -5,12 +5,8 @@ import com.example.springexamples.mock.dox.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepositoryMock {
-    public User save(User user) {
-        return null;
-    }
+public interface UserRepositoryMock {
+    public User save(User user);
 
-    public User findById(String id) {
-        return null;
-    }
+    public User findById(String id);
 }
