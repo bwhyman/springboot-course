@@ -1,8 +1,9 @@
+mysql-account: 2046204601 # 可声明变量多处引用，避免出错
 spring:
   datasource:
-    url: 'jdbc:mysql://120.46.159.231:3306/2046204601?createDatabaseIfNotExist=true'
-    username: 2046204601
-    password: 2046204601
+    url: 'jdbc:mysql://120.46.159.231:3306/${mysql-account}?createDatabaseIfNotExist=true'
+    username: ${mysql-account}
+    password: ${mysql-account}
     hikari:
       maximum-pool-size: 5
   sql:

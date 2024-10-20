@@ -1,6 +1,6 @@
 package com.example.cacheexamples.service;
 
-import com.example.cacheexamples.dto.User;
+import com.example.cacheexamples.dox.User;
 import com.example.cacheexamples.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Cacheable(value = "user", key = "#uid")
-    public User getUser(long uid) {
+    public User getUser(String uid) {
         User user = userRepository.getUser(uid);
         log.debug("called UserService getUser() user: {}", user);
         return user;
@@ -39,8 +39,7 @@ public class UserService {
     }
 
     @CacheEvict(value = "user", key = "#uid")
-    public void delUser(long uid) {
+    public void delUser(String uid) {
         // 从缓存删除，没有调用模拟的持久层删除
-        // 因此会实际调用getUser()方法，重新从持久层获取
     }
 }

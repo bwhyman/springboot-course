@@ -1,6 +1,6 @@
 package com.example.cacheexamples.repository;
 
-import com.example.cacheexamples.dto.User;
+import com.example.cacheexamples.dox.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,15 +11,15 @@ import java.util.Objects;
 public class UserRepository {
     private static final List<User> USERS;
     static {
-        User u1 = User.builder().id(1).name("BO").build();
-        User u2 = User.builder().id(2).name("SUN").build();
+        User u1 = User.builder().id("1").name("BO").build();
+        User u2 = User.builder().id("2").name("SUN").build();
         USERS = new ArrayList<>();
         USERS.add(u1);
         USERS.add(u2);
     }
-    public User getUser(long uid) {
+    public User getUser(String uid) {
         return USERS.stream()
-                .filter(u -> u.getId() == uid)
+                .filter(u -> u.getId().equals(uid))
                 .findFirst()
                 .orElse(null);
     }

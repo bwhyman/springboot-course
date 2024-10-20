@@ -19,7 +19,8 @@ public class SpringCacheConfig  {
         CaffeineCacheManager manager = new CaffeineCacheManager();
         // 创建缓存配置策略
         Cache<Object, Object> cache = Caffeine.newBuilder()
-                .expireAfterWrite(10, TimeUnit.SECONDS)
+                // 10s内没有访问移除
+                .expireAfterAccess(10, TimeUnit.SECONDS)
                 .maximumSize(200)
                 .build();
         // 为指定名称的缓存，指定配置

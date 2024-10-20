@@ -1,6 +1,6 @@
 package com.example.cacheexamples.controller;
 
-import com.example.cacheexamples.dto.User;
+import com.example.cacheexamples.dox.User;
 import com.example.cacheexamples.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ public class MyController {
     private final UserService userService;
 
     @GetMapping("users/{uid}")
-    public User getUser(@PathVariable long uid) {
+    public User getUser(@PathVariable String uid) {
         return userService.getUser(uid);
     }
 
@@ -32,7 +32,7 @@ public class MyController {
     }
 
     @DeleteMapping("users/{uid}")
-    public void delUser(@PathVariable long uid) {
+    public void delUser(@PathVariable String uid) {
         userService.delUser(uid);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cacheexamples.dto;
+package com.example.cacheexamples.dox;
 
 import lombok.*;
 
@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class User {
-    private Integer id;
+    private String id;
     private String name;
 }

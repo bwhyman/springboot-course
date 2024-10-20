@@ -1,5 +1,5 @@
 singleServerConfig:
-  address: redis://192.168.1.31:6379
+  address: redis://120.46.159.231:6379
   username: default
   password: 2046
   database: 0
