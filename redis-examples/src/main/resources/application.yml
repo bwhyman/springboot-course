@@ -1,8 +1,11 @@
 spring:
-  # 使用独立redisson配置时，不在spring.data.redis路径下
-  redis:
-    redisson:
-      file: classpath:redisson.yml
+  data:
+    redis:
+      host: 120.46.159.231
+      port: 6379 # 使用默认端口时无需声明
+      username: default
+      password: 2046
+      database: 0 # 替换数据库编号
 
 logging:
   level:
