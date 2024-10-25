@@ -7,7 +7,6 @@
         <artifactId>springboot-course</artifactId>
         <version>${revision}</version>
     </parent>
-    <groupId>com.example</groupId>
     <artifactId>redis-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>redis-examples</name>

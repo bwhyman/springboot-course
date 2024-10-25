@@ -9,8 +9,7 @@ spring:
 logging:
   level:
     root: warn
-    com:
-      example: debug
+    org.example: debug
   pattern:
     console: '%-5level %C.%M[%line] - %msg%n'
 

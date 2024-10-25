@@ -7,7 +7,6 @@
         <artifactId>springboot-course</artifactId>
         <version>${revision}</version>
     </parent>
-    <groupId>com.example</groupId>
     <artifactId>spring-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-examples</name>
