@@ -1,6 +1,6 @@
 -- 模块通过spring事件监听器启动时自动注册
 local field = 'total'
-local function rushBuy(keys, args)
+local function rushBuy_0(keys, args)
     -- 预操作商品记录的键
     local hkey = keys[1]
     -- 获取hash记录中的数量字段，按字符串比较
@@ -10,10 +10,10 @@ local function rushBuy(keys, args)
     -- 还有剩余则减一，并返回剩余数量
     return redis.call('hincrby', hkey, field, -1)
 end
-redis.register_function('rushBuy', rushBuy)
+redis.register_function('rushBuy_0', rushBuy_0)
 
 -- 判断expireSec秒内，执行超过count次返回flase
-local function expireAPICount(keys, args)
+local function expireAPICount_0(keys, args)
     local hkey = keys[1]
     -- lua函数参数仅支持传入java string/number类型
     -- 但均按redis string类型处理
@@ -33,4 +33,4 @@ local function expireAPICount(keys, args)
     redis.call('incr', hkey)
     return true
 end
-redis.register_function('expireAPICount', expireAPICount)
+redis.register_function('expireAPICount_0', expireAPICount_0)

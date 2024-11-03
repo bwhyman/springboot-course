@@ -1,10 +1,10 @@
 package org.example.redisexamples.service;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.redisexamples.component.ULID;
 import org.example.redisexamples.dox.Item;
 import org.example.redisexamples.dox.Order;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
 import org.redisson.api.stream.StreamAddArgs;
 import org.redisson.client.codec.IntegerCodec;
@@ -40,7 +40,7 @@ public class OrderService {
         // 调用redis抢购函数
         long quantity = redissonClient
                 .getFunction()
-                .call(FunctionMode.WRITE, "rushBuy", FunctionResult.LONG, List.of(key));
+                .call(FunctionMode.WRITE, "rushBuy_0", FunctionResult.LONG, List.of(key));
         if (quantity == -1) {
             log.debug("抢光啦");
             return quantity;

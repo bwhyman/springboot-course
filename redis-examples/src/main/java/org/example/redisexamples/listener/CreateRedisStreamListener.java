@@ -1,8 +1,8 @@
 package org.example.redisexamples.listener;
 
-import org.example.redisexamples.dox.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.redisexamples.dox.Order;
 import org.redisson.api.RStream;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.stream.StreamCreateGroupArgs;
@@ -20,7 +20,7 @@ public class CreateRedisStreamListener {
 
     // 应用启动时在redis创建order stream
     // 确保使用时指定steam一定存在
-    @EventListener(classes = ApplicationReadyEvent.class)
+    @EventListener(ApplicationReadyEvent.class)
     public void createOrderStream() {
         // 消息ID类型；消息体类型
         RStream<String, String> stream = redissonClient.getStream(Order.STREAM_KEY, StringCodec.INSTANCE);

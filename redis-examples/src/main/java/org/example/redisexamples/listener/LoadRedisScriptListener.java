@@ -24,15 +24,14 @@ public class LoadRedisScriptListener {
     @Value("mylib.lua")
     private Resource resource;
 
-    @EventListener(classes = ApplicationReadyEvent.class)
+    @EventListener(ApplicationReadyEvent.class)
     public void loadRedisScript() throws IOException {
         // 读取脚本内容
         String script = resource.getContentAsString(Charset.defaultCharset());
         RFunction rf = redissonClient.getFunction();
-        // 不是脚本的名称，是库的名称，没有扩展名
-        var name = resource.getFilename();
-        assert name != null;
-        // replace，用于重启时避免再次加载冲突
-        rf.loadAndReplace(name.substring(0, name.lastIndexOf(".")), script);
+        // 由于使用的是同一个redis数据库实例，如果库/函数名称相同，加载时会覆盖
+        // 因此，以数据库编号为后缀区别
+        // replace，用于重启微服务时覆盖避免冲突
+        rf.loadAndReplace("mylib_" + 0, script);
     }
 }

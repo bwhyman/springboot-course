@@ -26,7 +26,7 @@ public class ExpireService {
         // 参数：调用模式；调用的注册函数名称；返回类型；keys；args...
         return rf.call(
                 FunctionMode.WRITE,
-                "expireAPICount",
+                "expireAPICount_0",
                 FunctionResult.BOOLEAN,
                 List.of(key),
                 expireSec, count);
