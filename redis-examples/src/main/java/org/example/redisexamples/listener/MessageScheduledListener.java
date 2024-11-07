@@ -19,7 +19,7 @@ import java.util.Map;
 public class MessageScheduledListener {
     private final RedissonClient client;
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedDelay = 2000)
     public void onMessage() {
         // 初始化消费组
         RStream<String, String> stream = client.getStream(Order.STREAM_KEY, StringCodec.INSTANCE);

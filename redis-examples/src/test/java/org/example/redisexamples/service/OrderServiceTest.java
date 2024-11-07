@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 
@@ -31,10 +32,10 @@ class OrderServiceTest {
         Item item = Item.builder().id("01HN7JNHG93N3RSPF60MEG4WE2").build();
         final int AMOUNT = 200;
         CountDownLatch latch = new CountDownLatch(AMOUNT);
+        var random = new Random();
         for (int i = 0; i < AMOUNT; i++) {
-            int x = i;
             Thread.startVirtualThread(() -> {
-                long quantity = orderService.rushBuy(item, String.valueOf(x));
+                long quantity = orderService.rushBuy(item, String.valueOf(random.nextInt(100)));
                 log.debug("剩余数量：{}", quantity);
                 latch.countDown();
             });

@@ -8,6 +8,7 @@ local function rushBuy_0(keys, args)
         return -1
     end
     -- 还有剩余则减一，并返回剩余数量
+    -- hincrby指令返回的是执行后字段的`数字`而非字符串
     return redis.call('hincrby', hkey, field, -1)
 end
 redis.register_function('rushBuy_0', rushBuy_0)
