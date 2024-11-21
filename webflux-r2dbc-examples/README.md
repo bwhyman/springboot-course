@@ -1,10 +1,12 @@
 # webflux-r2dbc-examples
 
 ### Reactive Flux/Mono
+
 Flux/Mono发布者  
-map()/flatMap()/filter()/handle()/mapNotNull()/switchIfEmpty()/defaultIfEmpty()/Mono.defer()/onErrorResume()/Mono.error()/mapNotNull()/Flux.merge()/Mono.when()/Mono.just()/Flux.just()等方法。
+map()/flatMap()/filter()/handle()/mapNotNull()/switchIfEmpty()/defaultIfEmpty()/Mono.defer()/onErrorResume()/Mono.error()/mapNotNull()/Flux.merge()/Mono.when()/Mono.just()/Flux.just()/then()/thenReturn()/Flux.from()/Flux.fromIterable()/cast()等方法。
 
 ### WebFlux
+
 异步非阻塞Web框架，支持背压。  
 webflux中禁止阻塞操作，所有方法必须返回Flux/Mono订阅，直到controller方法返回。用户发送到controller的请求即为消息订阅者。    
 使用异步ServerHttpResponse/ServerHttpRequest接口替代Servlet接口，可直接通过@RequestAttribute注解注入controller方法。

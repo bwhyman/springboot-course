@@ -16,6 +16,16 @@ token: {{token}}
 Content-Type: application/json
 
 {
-  "account": "admin"
+  "account": "admin",
+  "name": "admin"
 }
 ###
+### 已存在异常
+POST http://localhost:8080/api/admin/users
+token: {{token}}
+Content-Type: application/json
+
+{
+  "account": "1001",
+  "name": "BO"
+}

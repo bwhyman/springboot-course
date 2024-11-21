@@ -28,6 +28,6 @@ public class AdminController {
     @GetMapping("info")
     public Mono<ResultVO> getInfo(@RequestAttribute(RequestConstant.UID) String uid) {
         return userService.getUserById(uid)
-                .map(user -> ResultVO.success(Map.of("user", user)));
+                .map(ResultVO::success);
     }
 }

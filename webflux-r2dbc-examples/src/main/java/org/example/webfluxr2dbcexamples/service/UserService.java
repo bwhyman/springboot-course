@@ -29,21 +29,20 @@ public class UserService {
     }
 
     @Transactional
-    public Mono<UserReact> addUser(UserReact user) {
+    public Mono<Void> addUser(UserReact user) {
         return userRepository.findByAccount(user.getAccount())
-                // 如果已存在，将异常封装到订阅对象。由统一异常处理
-                .handle((u, sink) ->
-                        sink.error(XException.builder()
-                                .codeN(Code.ERROR)
-                                .message("用户已存在")
-                                .build())
-                )
-                .cast(UserReact.class)
-                // 如果不存在
+                // 如果用户已存在，直接抛出异常
+                .flatMap(existingUser -> Mono.error(XException.builder()
+                        .codeN(Code.ERROR)
+                        .message("用户已存在")
+                        .build()))
+                // 如果用户不存在
                 .switchIfEmpty(Mono.defer(() -> {
+                    user.setRole(UserReact.ROLE_USER);
                     user.setPassword(passwordEncoder.encode(user.getAccount()));
                     return userRepository.save(user);
-                }));
+                }))
+                .then();
     }
 
     public Mono<List<UserReact>> listUsers(String role) {

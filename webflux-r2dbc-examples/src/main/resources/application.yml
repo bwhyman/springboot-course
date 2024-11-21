@@ -1,7 +1,7 @@
 mysql-account: 2046204601
 spring:
   r2dbc:
-    url: r2dbcs:mysql://116.63.13.220:3306/${mysql-account}
+    url: r2dbcs:mysql://120.46.159.231:3306/${mysql-account}
     username: ${mysql-account}
     password: ${mysql-account}
     pool:
