@@ -31,10 +31,18 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 开发环境/框架及版本：
 - IntelliJ IDEA Ultimate
 - OpenJDK ^21
-- Springboot ^3.3
+- Springboot ^3.5
 - Git ^2.4
 - MySQL ^8.4
 - Redis Stack ^7.4
+
+### Updates
+
+### 2025-06-25
+
+springboot: 3.5.0  
+spring-cloud: 2025.0.0  
+spring-ai-examples
 
 ### Examples
 课程代码由单工程多模块组成：
@@ -46,6 +54,7 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - /webflux-r2dbc-examples
 - /consul-examples
 - /backend-examples，为前端项目提供模拟数据互交
+- [/spring-ai-example](https://github.com/bwhyman/spring-ai-examples)
 
 ### Online Tutorials
 - [在线课程](https://mooc1-1.chaoxing.com/course/208931964.html)
@@ -71,10 +80,3 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - https://github.com/bwhyman/springboot-course
 - https://github.com/bwhyman/vite-vue3-examples
 - https://github.com/bwhyman/flutter_examples
-
-### Updates
-#### 2024-08-06
-升级到Java:21+springboot:3.3.1
-
-#### 2024-06-28
-在maven父模块声明全局依赖，便于子项目统一springboot版本。

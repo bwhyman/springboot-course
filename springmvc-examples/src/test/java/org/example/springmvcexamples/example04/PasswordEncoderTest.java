@@ -18,6 +18,7 @@ public class PasswordEncoderTest {
         log.debug(encoder.encode(pwd));
         log.debug(encoder.encode(pwd));
         String result = encoder.encode(pwd);
+        log.debug("{}", result.length());
         log.debug("{}", encoder.matches("12345", result));
         log.debug("{}", encoder.matches("123456", result));
     }
