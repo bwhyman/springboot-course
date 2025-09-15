@@ -1,0 +1,21 @@
+spring:
+  jackson:
+    default-property-inclusion: non_null # 序列化时忽略空属性值
+
+server:
+  servlet:
+    encoding: # 可统一设置header charset
+      charset: UTF-8
+      force-request: true
+      force-response: true
+
+logging:
+  level:
+    root: warn
+    org.example: debug
+  pattern:
+    console: '%-5level %C.%M[%line] - %msg%n'
+
+my:
+  secretkey: R28K42ZEJ8LWRHU5
+

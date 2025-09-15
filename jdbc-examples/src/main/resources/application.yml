@@ -12,6 +12,7 @@ spring:
 
 logging:
   level:
+    root: warn
     sql: debug
     org.example: debug
   pattern:

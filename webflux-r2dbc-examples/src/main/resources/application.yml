@@ -16,6 +16,7 @@ spring:
 
 logging:
   level:
+    root: warn
     sql: debug
     web: debug
     org.example: debug

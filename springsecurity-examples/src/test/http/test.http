@@ -1,0 +1,20 @@
+POST localhost:8080/api/open/login
+Content-Type: application/json
+
+{
+  "account": "2046204601",
+  "password": "2046204601"
+}
+> {% client.global.set("token", response.headers.valueOf("token")); %}
+
+### 未登录测试
+GET localhost:8080/api/manager/read
+
+### 有权限
+GET localhost:8080/api/manager/read
+token: {{token}}
+
+### 无权限
+GET localhost:8080/api/manager/delete
+token: {{token}}
+

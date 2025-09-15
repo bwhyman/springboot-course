@@ -11,9 +11,9 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 课程的具体技术内容包括：
 - 基于spring-data-jdbc的半自动面向对象持久化技术
 - 基于MySQL的关系型/非关系型混合开发技术
+- 基于Spring框架的业务逻辑层技术
 - 基于springmvc框架的控制层技术
 - 基于springdoc-openapi框架的API接口文档生成技术
-- 基于Spring框架的业务逻辑层技术
 - 基于spring-security框架的安全服务技术
 - 基于JWT/自定义加密数据的分布式单点登录鉴权技术
 - 基于JSR349规范的数据校验技术
@@ -26,6 +26,7 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - 基于Redis的缓存/限流/消息队列等技术
 - 基于webflux/r2dbc的异步非阻塞持久化技术
 - [基于spring-cloud的微服务网关/服务注册发现技术](https://github.com/bwhyman/uber-project-examples)
+- 基于spring-ai的AI应用程序开发技术
 
 ### Development Environments
 开发环境/框架及版本：
@@ -37,6 +38,10 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - Redis Stack ^7.4
 
 ### Updates
+
+#### 2025-09-13
+
+springsecurity-examples
 
 ### 2025-06-25
 
@@ -55,6 +60,7 @@ spring-ai-examples
 - /consul-examples
 - /backend-examples，为前端项目提供模拟数据互交
 - [/spring-ai-example](https://github.com/bwhyman/spring-ai-examples)
+- /springsecurity-examples
 
 ### Online Tutorials
 - [在线课程](https://mooc1-1.chaoxing.com/course/208931964.html)

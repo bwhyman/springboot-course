@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
+        <version>3.5.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -40,6 +40,7 @@
         <module>redis-examples</module>
         <module>webflux-r2dbc-examples</module>
         <module>consul-examples</module>
+        <module>springsecurity-examples</module>
     </modules>
     <build>
         <plugins>
@@ -51,7 +52,6 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
