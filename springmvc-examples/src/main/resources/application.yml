@@ -1,4 +1,7 @@
 spring:
+  threads:
+    virtual:
+      enabled: true
   jackson:
     default-property-inclusion: non_null # 序列化时忽略空属性值
   servlet:

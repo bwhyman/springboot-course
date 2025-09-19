@@ -39,6 +39,10 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 
 ### Updates
 
+#### 2025-09-17
+
+springmvc-examples，启用VT。
+
 #### 2025-09-13
 
 springsecurity-examples
