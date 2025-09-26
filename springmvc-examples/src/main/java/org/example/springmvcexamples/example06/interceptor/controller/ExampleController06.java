@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/example06/")
+@RequestMapping("/api/example06/open/")
 @RequiredArgsConstructor
 public class ExampleController06 {
     private final UserService06 userService;
@@ -23,9 +23,9 @@ public class ExampleController06 {
     private final JWTComponent jwtComponent;
 
     @PostMapping("login")
-    public ResultVO postLogin(@RequestBody User06 user, HttpServletResponse response) {
-        User06 u = userService.getUser(user.getUserName());
-        if (u == null || !encoder.matches(user.getPassword(), u.getPassword())) {
+    public ResultVO postLogin(@RequestBody User06 loginUser, HttpServletResponse response) {
+        User06 u = userService.getUser(loginUser.getUserName());
+        if (u == null || !encoder.matches(loginUser.getPassword(), u.getPassword())) {
             return ResultVO.error(Code.LOGIN_ERROR);
         }
         // 登录成功，模拟获取用户id角色等信息，加密
