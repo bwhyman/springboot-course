@@ -1,5 +1,5 @@
 ### 模拟脚本复杂，实际JS请求简单
-POST http://localhost:8080/api/example09/upload/infos
+POST http://localhost:8080/api/example09/upload
 Content-Type: multipart/form-data;charset=utf-8 boundary=WebAppBoundary
 
 --WebAppBoundary

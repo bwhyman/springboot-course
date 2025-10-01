@@ -1,8 +1,8 @@
 package org.example.springmvcexamples.example09.file;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.springmvcexamples.exception.Code;
 import org.example.springmvcexamples.exception.XException;
 import org.example.springmvcexamples.vo.ResultVO;
 import org.springframework.core.io.FileSystemResource;
@@ -10,18 +10,15 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -33,10 +30,10 @@ public class ExampleController09 {
     // 测试用下载文件。包含空格/中文
     final Path filePath = Path.of("E:/video/Mr. Bean at Olympics - 副本.mp4");
 
-    // springmvc底层基于原生支持零拷贝技术的transferTo()方法实现，默认16K字节数组缓冲区
+    // springmvc底层基于传统IO 16K字节数组缓冲区transferTo()方法实现
     // 因此，不会一次性将文件加载到内存
-    @GetMapping("files/{fileparam}")
-    public ResponseEntity<Resource> getFile(@PathVariable String fileparam) {
+    @GetMapping("files")
+    public ResponseEntity<Resource> downloadFile() {
         // 自动处理编码，支持中文/空格的文件名称；可避免手动拼接
         // 封装了http header Content-Disposition
         var contentDisposition = ContentDisposition
@@ -50,8 +47,8 @@ public class ExampleController09 {
 
     // 模拟预压缩的文件目录
     final Path dirPath = Path.of("E:/courses");
-    @GetMapping("files/{fileparam}/zip")
-    public ResponseEntity<StreamingResponseBody> getZip(@PathVariable String fileparam) {
+    @GetMapping("files-zip")
+    public ResponseEntity<StreamingResponseBody> downloadZip() {
         // 响应附件文件信息
         var contentDisposition = ContentDisposition
                 .attachment()
@@ -64,14 +61,14 @@ public class ExampleController09 {
                 // 手动控制输出流
                 .body(outputStream -> {
                     // 将输出流包装为压缩文件流。数据压缩为ZIP，并以流响应
-                    try (var zip = new ZipOutputStream(outputStream);
+                    try (var zip = new ZipOutputStream(outputStream, StandardCharsets.UTF_8);
                          var stream = Files.walk(dirPath)) {
                         // 仅读取文件，忽略目录
                         stream.filter(Files::isRegularFile)
                                 .forEach(file -> {
                                     try {
                                         // 创建压缩包内一个条目，文件在压缩包内名称
-                                        ZipEntry entry = new ZipEntry(file.getFileName().toString());
+                                        var entry = new ZipEntry(file.getFileName().toString());
                                         // 源文件大小
                                         entry.setSize(Files.size(file));
                                         zip.putNextEntry(entry);
@@ -90,57 +87,62 @@ public class ExampleController09 {
                 });
     }
 
-
-    // 模拟传入文件获取的ID/名称等参数
-    // 注入response对象，以获取response headers
-    // 以二进制字节流+缓冲区下载，避免大文件内存溢出
-    @GetMapping("files2/{fileparam}")
-    public void getFile(@PathVariable String fileparam, HttpServletResponse response) {
-        // 编码以支持中文文件名称；使用spring工具类可避免`空格`被编码为`+`
-        var fileName = UriUtils.encode(filePath.getFileName().toString(), StandardCharsets.UTF_8);
-        // 声明响应类型为文件附件，浏览器以指定文件名保存
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-        // 以NIO Channel读取
-        try (FileChannel fileChannel = FileChannel.open(filePath, StandardOpenOption.READ)) {
-            // 声明响应体长度，便于前端展示进度条等
-            response.setContentLength((int) Files.size(filePath));
-            // 缓冲区，500K
-            ByteBuffer buffer = ByteBuffer.allocate(5 * 1024 * 100);
-            int len;
-            while ((len = fileChannel.read(buffer)) != -1) {
-                // 缓冲区转为读模式
-                buffer.flip();
-                // 写入输出流
-                response.getOutputStream().write(buffer.array(), 0, len);
-                // 重置缓冲区
-                buffer.clear();
-            }
-        } catch (IOException e) {
-            throw XException.builder().message("文件读取错误").build();
-        }
-    }
-
     final Path uploadDirectory = Path.of("E:/");
 
     // 地址栏可传递参数
     // @RequestPart，从form表单获取基本参数
     // MultipartFile，封装上传的二进制文件
-    @PostMapping("upload/{fileparam}")
-    public ResultVO postFile(@PathVariable String fileparam,
-                             @RequestPart String pname,
+    @PostMapping("upload")
+    public ResultVO postFile(@RequestPart String pname,
                              MultipartFile file) {
-        String fileName;
-        // 上传文件不存在，或文件名称不存在
-        if (file == null || (fileName = file.getOriginalFilename()) == null) {
-            throw XException.builder().message("上传错误").build();
+        var fileName = file.getOriginalFilename();
+        if (!StringUtils.hasLength(fileName)) {
+            throw XException.builder()
+                    .codeN(Code.ERROR)
+                    .message("上传文件为空")
+                    .build();
         }
-        log.debug("filename: {}; pname: {}; size: {}", fileName, pname, file.getSize());
+        // 清洗文件名，防止路径遍历攻击。`../../../`
+        var cleanedNamePath = Path.of(fileName).getFileName();
+        log.debug("filename: {}; pname: {}; size: {}", cleanedNamePath, pname, file.getSize());
         try {
             // 可忽略上传文件名称，按服务器端逻辑重命名保存
-            file.transferTo(uploadDirectory.resolve(Path.of(fileName)));
+            file.transferTo(uploadDirectory.resolve(cleanedNamePath));
         } catch (IOException e) {
-            throw XException.builder().message("上传错误").build();
+            throw XException.builder()
+                    .codeN(Code.ERROR)
+                    .message("上传错误")
+                    .build();
         }
         return ResultVO.ok();
     }
+
+    // 无法调用零拷贝方法
+    // 手动基于NIO实现零拷贝
+    /*@GetMapping("files-zerocopy")
+    public ResponseEntity<StreamingResponseBody> downloadZeroCopy() throws IOException {
+        var contentDisposition = ContentDisposition
+                .attachment()
+                .filename(filePath.getFileName().toString(), StandardCharsets.UTF_8)
+                .build();
+        long size = Files.size(filePath);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString())
+                .header(HttpHeaders.CONTENT_LENGTH, String.valueOf(size))
+                .body(outputStream -> {
+                    try (var fileChannel = FileChannel.open(filePath, StandardOpenOption.READ);
+                         var outChannel = Channels.newChannel(outputStream)) {
+                        // 防止因文件系统/TCP窗口等限制因素无法一次性传输
+                        long position  = 0;
+                        while (position  < size) {
+                            position  += fileChannel.transferTo(position , size - position, outChannel);
+                        }
+                    } catch (IOException e) {
+                        throw XException.builder()
+                                .codeN(500)
+                                .message("文件读取错误")
+                                .build();
+                    }
+                });
+    }*/
 }
