@@ -1,11 +1,11 @@
 # redis-examples
 
 ### Introductions
-Redis服务器: redis-stack-server。  
-支持Redis7/RediSearch/RedisJSON等。
+Redis服务器: redis:8.2。  
+支持Redis/RediSearch/RedisJSON等。
 
 Java客户端：redisson-spring-boot-starter。   
-支持redis-stack扩展的实现；  
+支持redis扩展的实现，但还不支持向量数据检索；  
 支持原子变量/分布式锁/队列/集合消息等；  
 支持可扩展的Java数据结构；  
 基于非阻塞Netty框架，可以便捷的切换为响应式异步非阻塞编程模式；  

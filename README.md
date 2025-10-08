@@ -9,6 +9,7 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 
 课程基于Springboot/spring Cloud框架的后端微服务架构、设计思想与实现技术。  
 课程的具体技术内容包括：
+
 - 基于spring-data-jdbc的半自动面向对象持久化技术
 - 基于MySQL的关系型/非关系型混合开发技术
 - 基于Spring框架的业务逻辑层技术
@@ -29,15 +30,22 @@ Web系统框架，是东北林业大学软件工程专业第5学期的一门专�
 - 基于spring-ai的AI应用程序开发技术
 
 ### Development Environments
+
 开发环境/框架及版本：
+
 - IntelliJ IDEA Ultimate
 - OpenJDK ^21
 - Springboot ^3.5
 - Git ^2.4
 - MySQL ^8.4
-- Redis Stack ^7.4
+- Redis ^8.2
 
 ### Updates
+
+#### 2025-10-08
+
+一直以为的零拷贝技术下载，实际由于servlet对outputstream的封装，底层根本无法调用原生函数，依然是传统的字节数组缓冲区。  
+redis:8 全文检索示例。  
 
 #### 2025-09-17
 
@@ -54,7 +62,9 @@ spring-cloud: 2025.0.0
 spring-ai-examples
 
 ### Examples
+
 课程代码由单工程多模块组成：
+
 - /jdbc-examples
 - /spring-examples
 - /springmvc-examples
@@ -67,24 +77,31 @@ spring-ai-examples
 - /springsecurity-examples
 
 ### Online Tutorials
+
 - [在线课程](https://mooc1-1.chaoxing.com/course/208931964.html)
 
 ### Backend Integration
+
 [后端微服务框架整合](https://mooc1.chaoxing.com/nodedetailcontroller/visitnodedetail?courseId=208931964&knowledgeId=298571472)
 
 [前后端联调](https://mooc1.chaoxing.com/nodedetailcontroller/visitnodedetail?knowledgeId=300177471&courseId=208931964)
 
 ### Microservices
+
 整合基于springboot的微服务/基于spring-cloud-gateway的异步非阻塞网关微服务/
 基于spring-cloud-alibaba-nacos的微服务注册与发现服务/华为云服务器/Docker容器的，开发测试与生产环境下部署的流程演示。
+
 - https://github.com/bwhyman/uber-project-examples
 - [视频讲解](https://mooc1-1.chaoxing.com/nodedetailcontroller/visitnodedetail?courseId=208931964&knowledgeId=394488338)
 
 ### Continuous Deployment
+
 基于GitHub Actions工作流/GitHub Packages/华为云服务器的，持续集成/持续交付/持续部署示例
+
 - [视频讲解](https://mooc1-1.chaoxing.com/nodedetailcontroller/visitnodedetail?courseId=208931964&knowledgeId=326897803)
 
 ### Related Courses
+
 - https://github.com/bwhyman/java-course
 - https://github.com/bwhyman/web-course
 - https://github.com/bwhyman/springboot-course
