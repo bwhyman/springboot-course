@@ -22,6 +22,8 @@ FT._LIST
 
 ft.explain st_index "中国人工智能"
 
+ft.explain st_index "同步时间"
+
 ft.explain st_index "Java 24 正式版发布"
 
 ft.search  st_index '布'

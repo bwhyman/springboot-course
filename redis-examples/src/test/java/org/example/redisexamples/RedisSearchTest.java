@@ -25,7 +25,10 @@ public class RedisSearchTest {
         if(search.getIndexes().contains(index)) {
             return;
         }
+        // ft.create st_index_v1 prefix 1 st: language 'chinese' schema  title text body text
+        // 等效命令，对指定前缀键添加索引
         IndexOptions op = IndexOptions.defaults()
+                .prefix("st:")
                 .language("chinese");
         // 建索引的字段与类型
         search.createIndex(index, op, FieldIndex.text("title"), FieldIndex.text("content"));
@@ -46,6 +49,7 @@ public class RedisSearchTest {
 
     @Test
     void search() {
+        // ft.search st_index '正式版'
         SearchResult search = redissonClient
                 .getSearch(StringCodec.INSTANCE)
                 .search(index, "正式版", QueryOptions.defaults());
