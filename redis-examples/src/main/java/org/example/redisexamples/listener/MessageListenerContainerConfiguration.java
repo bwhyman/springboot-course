@@ -25,7 +25,8 @@ public class MessageListenerContainerConfiguration {
 
     private final RedisConnectionFactory redisConnectionFactory;
     private final OrderMessageListener listener;
-    private final ExecutorService executor =  Executors.newSingleThreadExecutor();
+    // 创建基于虚拟线程的执行器。需在配置中启动。
+    private final ExecutorService executor =  Executors.newVirtualThreadPerTaskExecutor();
 
     @PreDestroy
     public void destroyExecutor() throws InterruptedException {
@@ -40,7 +41,7 @@ public class MessageListenerContainerConfiguration {
         StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ObjectRecord<String, String>> options =
                 StreamMessageListenerContainer.StreamMessageListenerContainerOptions
                         .builder()
-                        // 自定义单线程线程池。默认使用为执行短操作反复创建销毁的伪线程池
+                        // 自定义单执行器。默认使用为执行短操作反复创建销毁的伪线程池
                         .executor(executor)
                         // Stream 读取消息时的阻塞时间
                         .pollTimeout(Duration.ofMillis(100))

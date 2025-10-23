@@ -1,7 +1,7 @@
 package org.example.redisexamples.service;
 
-import org.example.redisexamples.dox.Item;
 import lombok.extern.slf4j.Slf4j;
+import org.example.redisexamples.dox.Item;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 
 @SpringBootTest
@@ -41,5 +42,8 @@ class OrderServiceTest {
             });
         }
         latch.await();
+        // 让消息监听器有时间，读取消息队列中的消息
+        TimeUnit.SECONDS.sleep(10);
+
     }
 }

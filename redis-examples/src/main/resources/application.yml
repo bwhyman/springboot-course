@@ -1,4 +1,7 @@
 spring:
+  threads:
+    virtual:
+      enabled: true
   data:
     redis:
       host: 120.46.159.231

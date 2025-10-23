@@ -21,6 +21,6 @@ public class OrderMessageListener implements StreamListener<String, ObjectRecord
         // 通知redis，确认消费者消费了消息
         template.opsForStream().acknowledge(Order.GROUP_NAME, message);
         // 移除已消费消息。为测试没有移除
-        // template.opsForStream().delete(Order.STREAM_KEY, message.getId());
+        template.opsForStream().delete(Order.STREAM_KEY, message.getId());
     }
 }
