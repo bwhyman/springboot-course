@@ -1,6 +1,5 @@
 package org.example.springsecurityexamples.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +7,7 @@ import org.example.springsecurityexamples.exception.Code;
 import org.example.springsecurityexamples.vo.ResultVO;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class ResponseComponent {
 
-    private final ObjectMapper objectMapper;
+    private final JsonMapper objectMapper;
     public void response(HttpServletResponse response, Code code) {
         response(response, code.getCode(), code.getMessage());
     }

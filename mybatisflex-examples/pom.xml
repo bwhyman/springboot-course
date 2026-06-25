@@ -1,48 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
-    <artifactId>springboot-course</artifactId>
-    <version>${revision}</version>
-    <packaging>pom</packaging>
-    <properties>
-        <revision>1.0-SNAPSHOT</revision>
-        <java.version>25</java.version>
-        <spring-cloud.version>2025.0.0</spring-cloud.version>
-    </properties>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>org.example</groupId>
+        <artifactId>springboot-course</artifactId>
+        <version>${revision}</version>
     </parent>
 
-    <dependencyManagement>
+    <artifactId>mybatisflex-examples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>mybatisflex-examples</name>
+    <description>mybatisflex-examples</description>
+
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>${spring-cloud.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-spring-boot4-starter</artifactId>
+            <version>1.11.7</version>
+        </dependency>
+        <!-- provide the autoconfigure for jdbc(datasource) in 4.x -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-    </dependencyManagement>
 
-    <modules>
-        <module>jdbc-examples</module>
-        <module>spring-examples</module>
-        <module>springmvc-examples</module>
-        <module>cache-examples</module>
-        <module>redis-examples</module>
-        <module>webflux-r2dbc-examples</module>
-        <module>consul-examples</module>
-        <module>springsecurity-examples</module>
-        <module>mybatisflex-examples</module>
-    </modules>
     <build>
         <plugins>
             <plugin>
@@ -70,6 +68,11 @@
                         <configuration>
                             <annotationProcessorPaths>
                                 <path>
+                                    <groupId>com.mybatis-flex</groupId>
+                                    <artifactId>mybatis-flex-processor</artifactId>
+                                    <version>1.11.7</version>
+                                </path>
+                                <path>
                                     <groupId>org.projectlombok</groupId>
                                     <artifactId>lombok</artifactId>
                                 </path>
@@ -95,4 +98,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

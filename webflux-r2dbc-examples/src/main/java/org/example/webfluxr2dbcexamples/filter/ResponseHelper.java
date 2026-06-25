@@ -2,7 +2,6 @@ package org.example.webfluxr2dbcexamples.filter;
 
 import org.example.webfluxr2dbcexamples.exception.Code;
 import org.example.webfluxr2dbcexamples.vo.ResultVO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.nio.charset.StandardCharsets;
 
@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @RequiredArgsConstructor
 public class ResponseHelper {
-    private final ObjectMapper objectMapper;
+    private final JsonMapper objectMapper;
 
     @SneakyThrows
     public Mono<Void> response(Code code, ServerWebExchange exchange) {
