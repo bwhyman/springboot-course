@@ -4,7 +4,7 @@ spring:
       enabled: true
   data:
     redis:
-      host: 120.46.159.231
+      host: 192.168.1.31
       port: 6379 # 使用默认端口时无需声明
       username: default
       password: 2046

@@ -64,8 +64,8 @@ class UserMapperTest {
 
     @Test
     void getUserAddressesByUidQueryJson() {
-        var u = userMapper.getUserAddressesByUidQueryJson(29790033938496L);
-        log.debug("user: {}", u.getUser());
+        var u = userMapper.getUserAddressesByUidQueryJson(31078024548416L);
+        log.debug("user: {}", u.getUserInfo());
         log.debug("addresses: {}", u.getAddresses());
     }
 }

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAddressesJsonDTO {
-    private String user;
+    private String userInfo;
     private String addresses;
 }

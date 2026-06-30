@@ -53,14 +53,15 @@ public interface UserMapper extends BaseMapper<User> {
     default UserAddressesJsonDTO getUserAddressesByUidQueryJson(long uid) {
         return QueryChain.of(this)
                 .select("""
-                        json_object('id', u.id, 'name', u.name) as user
+                        jsonb_build_object('id', u.id, 'name', u.name) as user_info
                         """)
                 .select("""
-                        json_arrayagg(json_object('id', a.id, 'detail', a.detail)) as addresses
+                        jsonb_agg(jsonb_build_object('id', a.id, 'detail', a.detail)) as addresses
                         """)
                 .from(UserTableDef.USER.as("u"))
                 .from(AddressTableDef.ADDRESS.as("a"))
                 .where(UserTableDef.USER.ID.eq(uid))
+                .groupBy("u.id")
                 .oneAs(UserAddressesJsonDTO.class);
     }
 }
