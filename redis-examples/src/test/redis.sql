@@ -1,3 +1,26 @@
+-- zset添加测试数据
+zadd courses:java 95 users:100
+zadd courses:java 80 users:101
+zadd courses:java 75 users:102
+zadd courses:java 85 users:103
+zadd courses:java 98 users:104
+
+-- 倒序((由高到低))获取score最高前三名，以及具体score
+zrange courses:java 0 2 rev withscores
+
+-- 倒序获取score范围元素及score
+-- 倒序时，startscore > endscore
+zrange courses:java 100 90 byscore rev withscores
+
+-- 获取指定member倒序(由高到低)排名
+zrevrank courses:java users:100
+
+-- 获取score在指定区间的元素个数
+zcount courses:java 90 100
+----------------
+-- 指定key，自增+1，上限2，5秒过期
+increx expires:agentids:6562 byint 1 ubound 2 ex 5
+-----------
 ft.dropindex st_index
 
 ft.create st_index_v1 prefix 1 st: language 'chinese' schema  title text content text

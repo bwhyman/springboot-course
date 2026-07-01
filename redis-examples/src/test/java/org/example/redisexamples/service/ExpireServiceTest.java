@@ -12,8 +12,20 @@ import java.util.concurrent.TimeUnit;
 public class ExpireServiceTest {
     @Autowired
     private ExpireService expireService;
-
+    // 基于redis:8.8新指令实现
     @Test
+    void requestCheckByIncrex() throws InterruptedException {
+        var key = "expires:agentids:6562";
+        var count = 2;
+        var expireSec = 5;
+        for (int i = 0; i < 11; i++) {
+            boolean success = expireService.requestCheckByIncrex(key, count, expireSec);
+            log.debug("{}", success);
+            TimeUnit.SECONDS.sleep(1);
+        }
+    }
+
+    /*@Test
     void expireTest() throws InterruptedException {
         // 模拟API请求限流。
         var key = "expires:agentids:6561";
@@ -24,5 +36,6 @@ public class ExpireServiceTest {
             log.debug("{}", success);
             TimeUnit.SECONDS.sleep(1);
         }
-    }
+    }*/
+
 }

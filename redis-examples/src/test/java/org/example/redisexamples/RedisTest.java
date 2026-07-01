@@ -1,14 +1,14 @@
 package org.example.redisexamples;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.redisexamples.component.ULID;
 import org.example.redisexamples.dox.Order;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RBucket;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.StringCodec;
-import org.redisson.codec.TypedJsonJacksonCodec;
+import org.redisson.codec.TypedJsonJackson3Codec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -73,10 +73,10 @@ public class RedisTest {
         // 创建Order类型+ID的redis键
         var key = Order.PRE_KEY + orderId;
         // 无类型标注JSON序列化
-        RBucket<Order> bucket = redissonClient.getBucket(key, new TypedJsonJacksonCodec(Order.class));
+        RBucket<Order> bucket = redissonClient.getBucket(key, new TypedJsonJackson3Codec(Order.class));
         bucket.set(Order.builder().id(orderId).userId("1").itemId("1").build());
         // 映射的新对象
-        RBucket<OrderX> bucketN = redissonClient.getBucket(key,new TypedJsonJacksonCodec(OrderX.class));
+        RBucket<OrderX> bucketN = redissonClient.getBucket(key,new TypedJsonJackson3Codec(OrderX.class));
         // 反序列化为Java对象。因具体化了泛型类型，支持类型检测
         OrderX order = bucketN.get();
         log.debug("{}", order);
