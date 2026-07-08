@@ -1,3 +1,22 @@
+-- 判断 expireSec 秒内，执行超过 count 次返回 false
+-- increx，redis:8.8新指令，整合自增/上下限/过期时间等
+-- 对应 Redis 指令: increx expires:agentids:6561 byint 1 ubound 2 ex 5 enx
+local function expireByIncrex(keys, args)
+    -- 强制转换参数为数字
+    local count = tonumber(args[1])
+    local expireSec = tonumber(args[2])
+    -- 返回数组，[当前值, 执行步长]
+    local r = redis.call('increx', keys[1], 'byint', 1, 'ubound', count, 'ex', expireSec, 'enx')
+    -- 数组索引从1计算
+    -- 执行步长为0，未执行
+    if r[2] == 0 then
+        return false
+    end
+    return true
+end
+-- 以数据库编号，修改后缀
+redis.register_function('expireByIncrex_0', expireByIncrex)
+
 -- 模块通过spring事件监听器启动时自动注册
 local field = 'total'
 local function rushBuy_0(keys, args)
@@ -12,26 +31,6 @@ local function rushBuy_0(keys, args)
     return redis.call('hincrby', hkey, field, -1)
 end
 redis.register_function('rushBuy_0', rushBuy_0)
-
-
--- 判断 expireSec 秒内，执行超过 count 次返回 false
--- increx，redis:8.8新指令，整合自增/上下限/过期时间等
--- 对应 Redis 指令: increx expires:agentids:6561 byint 1 ubound 2 ex 5
-local function expireByIncrex(keys, args)
-    -- 强制转换参数为数字
-    local count = tonumber(args[1])
-    local expireSec = tonumber(args[2])
-    -- 返回数组，[当前值, 执行步长]
-    local r = redis.call('increx', keys[1], 'byint', 1, 'ubound', count, 'ex', expireSec)
-    -- 数组索引从1计算
-    -- 执行步长为0，未执行
-    if r[2] == 0 then
-        return false
-    end
-    return true
-end
--- 以数据库编号，修改后缀
-redis.register_function('expireByIncrex_0', expireByIncrex)
 
 -- redis:8.8 前，传统实现方式
 -- 判断 expireSec 秒内，执行超过 count 次返回 false

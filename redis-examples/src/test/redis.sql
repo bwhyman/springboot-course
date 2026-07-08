@@ -18,8 +18,8 @@ zrevrank courses:java users:100
 -- 获取score在指定区间的元素个数
 zcount courses:java 90 100
 ----------------
--- 指定key，自增+1，上限2，5秒过期
-increx expires:agentids:6562 byint 1 ubound 2 ex 5
+-- 指定key，自增+1，上限2，5秒过期，更新TTL不变
+increx expires:agentids:6562 byint 1 ubound 2 ex 5 enx
 -----------
 ft.dropindex st_index
 
