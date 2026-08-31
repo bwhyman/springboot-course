@@ -4,6 +4,8 @@ spring:
     url: 'jdbc:postgresql://192.168.1.31:5432/${db-account}'
     username: ${db-account}
     password: ${db-account}
+#    hikari:
+#      maximum-pool-size: 5
 
   sql:
     init:

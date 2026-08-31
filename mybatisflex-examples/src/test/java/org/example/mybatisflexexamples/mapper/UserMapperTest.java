@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
 class UserMapperTest {
@@ -67,5 +69,17 @@ class UserMapperTest {
         var u = userMapper.getUserAddressesByUidQueryJson(31078024548416L);
         log.debug("user: {}", u.getUserInfo());
         log.debug("addresses: {}", u.getAddresses());
+    }
+    @Test
+    void getUserAddressesByDb() {
+        var u = userMapper.getUserAddressesByDb(31078024548416L);
+        log.debug("user: {}", u.getUserInfo());
+        log.debug("addresses: {}", u.getAddresses());
+    }
+
+    @Test
+    void listUserCounts() {
+        userMapper.listUserCounts(List.of(31078024548416L, 31078024548417L))
+                .forEach(IO::println);
     }
 }

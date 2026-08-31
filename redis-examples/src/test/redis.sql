@@ -20,6 +20,21 @@ zcount courses:java 90 100
 ----------------
 -- 指定key，自增+1，上限2，5秒过期，更新TTL不变
 increx expires:agentids:6562 byint 1 ubound 2 ex 5 enx
+-----------------------------------------------
+-- 创建不重复集合。以帖子ID为键，用户ID为元素
+sadd topics:like:1001 57831
+sadd topics:like:1001 57833
+sadd topics:like:1001 57836
+
+-- 统计点赞数量，时间复杂度O(1)
+scard topics:like:1001
+
+-- 用户是否点过赞。判断元素是否存在
+sismember topics:like:1001 57831
+
+-- 取消点赞，移除元素
+srem topics:like:1001 57831
+
 -----------
 ft.dropindex st_index
 

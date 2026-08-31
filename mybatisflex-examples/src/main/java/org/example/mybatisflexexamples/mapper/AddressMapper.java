@@ -37,7 +37,8 @@ public interface AddressMapper extends BaseMapper<Address> {
                 .select(AddressTableDef.ADDRESS.ID.as("addressId"))
                 .select(AddressTableDef.ADDRESS.USER_ID.as("userId"))
                 .from(AddressTableDef.ADDRESS)
-                .from(UserTableDef.USER)
+                .join(UserTableDef.USER)
+                .on(AddressTableDef.ADDRESS.USER_ID.eq(UserTableDef.USER.ID))
                 .where(AddressTableDef.ADDRESS.ID.eq(aid))
                 .oneAs(AddressUserDTO.class);
     }
@@ -47,7 +48,8 @@ public interface AddressMapper extends BaseMapper<Address> {
                 .select(AddressTableDef.ADDRESS.DEFAULT_COLUMNS)
                 .select(UserTableDef.USER.DEFAULT_COLUMNS)
                 .from(AddressTableDef.ADDRESS)
-                .from(UserTableDef.USER)
+                .join(UserTableDef.USER)
+                .on(AddressTableDef.ADDRESS.USER_ID.eq(UserTableDef.USER.ID))
                 .where(AddressTableDef.ADDRESS.ID.eq(aid))
                 .oneAs(AddressUser2DTO.class);
     }

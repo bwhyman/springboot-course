@@ -77,7 +77,7 @@ class AddressMapperTest {
     void testListAddresses() {
         // 每页5条，第一页
         Page<Address> page = Page.of(1, 5);
-        Page<Address> addressesPage = addressMapper.listAddresses(29790033938496L, page);
+        Page<Address> addressesPage = addressMapper.listAddresses(31078024548416L, page);
         log.debug("TotalRow: {}", addressesPage.getTotalRow());
         log.debug("TotalPage: {}", addressesPage.getTotalPage());
         List<Address> addresses = addressesPage.getRecords();

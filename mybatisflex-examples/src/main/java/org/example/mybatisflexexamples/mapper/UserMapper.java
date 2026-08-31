@@ -2,10 +2,13 @@ package org.example.mybatisflexexamples.mapper;
 
 import com.mybatisflex.core.BaseMapper;
 import com.mybatisflex.core.query.QueryChain;
+import com.mybatisflex.core.row.Db;
 import com.mybatisflex.core.row.Row;
+import com.mybatisflex.core.row.RowUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.example.mybatisflexexamples.dto.UserAddressDTO;
 import org.example.mybatisflexexamples.dto.UserAddressesJsonDTO;
+import org.example.mybatisflexexamples.dto.UserCountDTO;
 import org.example.mybatisflexexamples.entity.Address;
 import org.example.mybatisflexexamples.entity.User;
 import org.example.mybatisflexexamples.entity.table.AddressTableDef;
@@ -25,7 +28,7 @@ public interface UserMapper extends BaseMapper<User> {
                 .on(UserTableDef.USER.ID.eq(AddressTableDef.ADDRESS.USER_ID))
                 .where(UserTableDef.USER.ID.eq(uid))
                 .listAs(Row.class);
-       //
+        //
         User u = rows.stream()
                 .findFirst()
                 .map(row -> User.builder()
@@ -59,9 +62,33 @@ public interface UserMapper extends BaseMapper<User> {
                         jsonb_agg(jsonb_build_object('id', a.id, 'detail', a.detail)) as addresses
                         """)
                 .from(UserTableDef.USER.as("u"))
-                .from(AddressTableDef.ADDRESS.as("a"))
+                .join(AddressTableDef.ADDRESS.as("a"))
+                .on(UserTableDef.USER.ID.eq(AddressTableDef.ADDRESS.USER_ID))
                 .where(UserTableDef.USER.ID.eq(uid))
                 .groupBy("u.id")
                 .oneAs(UserAddressesJsonDTO.class);
+    }
+
+    default UserAddressesJsonDTO getUserAddressesByDb(long uid) {
+        var sql = """
+                select jsonb_build_object('id', u.id, 'name', u.name) as user_info,
+                       jsonb_agg(jsonb_build_object('id', a.id, 'detail', a.detail)) as addresses
+                from user_x u join address a on u.id=a.user_id
+                where u.id=? group by u.id;
+                """;
+        var row = Db.selectOneBySql(sql, uid);
+        return RowUtil.toEntity(row, UserAddressesJsonDTO.class);
+    }
+
+    default List<UserCountDTO> listUserCounts(List<Long> ids) {
+        return QueryChain.of(this)
+                .select("u.id, u.name, count(a.user_id) as count")
+                .from(UserTableDef.USER.as("u"))
+                .join(AddressTableDef.ADDRESS.as("a"))
+                .on(UserTableDef.USER.ID.eq(AddressTableDef.ADDRESS.USER_ID))
+                .where(UserTableDef.USER.ID.in(ids))
+                .groupBy("u.id")
+                .listAs(UserCountDTO.class);
+
     }
 }
