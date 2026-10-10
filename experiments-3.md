@@ -41,10 +41,12 @@ idea 添加连接远程数据库。
 实现以下数据检索，且需先通过 explain 分析预执行的 SQL 语句，验证数据检索方式是否符合预期后再在组件实现。
 
 基于 QUeryChain 实现
+
 - 基于 userid ，查询全部 address 信息，通过 AddressMapper 组件查询即可。
-- 基于 userid ，查询 address 信息以及 user 信息，扁平化封装。
+- 基于 addressid ，查询 address 信息以及 user 信息，扁平化封装，设计DTO类。
 - 基于 userid ，查询 user 信息，以及全部 addresses 信息，设计 DTO 类。
 - 基于 userid ，查询姓名，以及拥有的 addresses 数量，设计 DTO 类。
+- 基于userids，查询全部姓名，以及拥有的addresses数量。
 - 尝试基于 userid ，将查询的 user/addresses 信息，封装为JSON。 
 
 编写测试类测试。
