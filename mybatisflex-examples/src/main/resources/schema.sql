@@ -45,20 +45,20 @@ create index if not exists teacher_department_idx on teacher ((("department" ->>
 (
     id      bigint primary key,
     name    varchar(20),
-    balance float,
+    balance numeric(10, 2), -- 10位整数2位小数
     version int default 0
 );*/
 
 /*
   悲观锁
 */
-/*create table if not exists account_pess
+create table if not exists account_pess
 (
     id      bigint primary key,
     name    varchar(20),
-    balance float
+    balance numeric(10, 2)
 );
-*/
+
 -- 子项以JSON数组保存
 -- [{"number", "name", "point", "description"}]
 /*create table if not exists process

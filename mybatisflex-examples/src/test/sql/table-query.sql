@@ -57,4 +57,8 @@ explain
 select u.id, u.name, count(a.user_id) as count
 from user_x u join address a on u.id=a.user_id
 where u.id in (31078024548416,31078024548417)
-group by u.id
+group by u.id;
+
+update account
+set balance = balance - 100
+where id=123456 and balance >= 100;

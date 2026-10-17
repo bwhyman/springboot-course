@@ -9,6 +9,7 @@ import org.example.mybatisflexexamples.mapper.AccountPessMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -29,7 +30,7 @@ public class AccountService {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException _) {
         }
-        account.setBalance(account.getBalance() - spend);
+        account.setBalance(account.getBalance().subtract(new BigDecimal(spend)));
         int result = accountMapper.update(account);
         // 更新记录条数
         if (result == 0) {
@@ -48,8 +49,8 @@ public class AccountService {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException _) {
         }
-        double balance = account.getBalance() - spend;
-        if (balance < 0) {
+        BigDecimal balance = account.getBalance().subtract(new BigDecimal(spend));
+        if (balance.doubleValue() < 0) {
             throw new RuntimeException("账户余额不足");
         }
         account.setBalance(balance);

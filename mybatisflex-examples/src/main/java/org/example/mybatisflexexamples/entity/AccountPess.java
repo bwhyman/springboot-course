@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.mybatisflexexamples.component.SnowflakeGenerator;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,5 +20,5 @@ public class AccountPess {
     @Id(keyType = KeyType.Generator, value = SnowflakeGenerator.MINI_SNOWFLAKE)
     private Long id;
     private String name;
-    private double balance;
+    private BigDecimal balance;
 }
